@@ -1,0 +1,39 @@
+<ion-modal-view>
+    <ion-header-bar>
+      <h1 class="title">Details</h1>
+      <button class="button" ng-click="modal.hide()">Close</button>
+    </ion-header-bar>
+  <ion-content>
+    <div class="list card">
+      <div class="item">
+        <h2><strong>{{barDetail.name}}</strong></h2>
+        <h3>{{barDetail.phone}}</h3>
+        <h3>{{barDetail.address}}</h3>
+        <p><a href='{{barDetail.website}}'>{{barDetail.website}}</a></p>
+      </div>
+      <div class="item item-body" ng-repeat='mic_night in barDetail.mic_nights'>
+        <h2><strong>{{mic_night.day_of_week}}'s</strong></h2>
+        <p><strong>Time: </strong>{{mic_night.time}}</p>
+        <p><strong>Length of Performance: </strong>{{mic_night.length_of_time}}</p>
+        <p><strong>Music Genre: </strong>{{mic_night.music_genre}}</p>
+        <p><strong>All Age Venue: </strong>{{mic_night.all_ages}}</p>
+        <p><strong>Equipment Provided: </strong>{{mic_night.equipment_provided}}</p>
+        <p><strong>Notes: </strong>{{mic_night.notes}}</p>
+      </div>
+      <div class="item tabs tabs-secondary tabs-icon-left">
+        <a class="tab-item">
+          <i class="icon ion-thumbsup"></i>
+          Like
+        </a>
+        <a class="tab-item">
+          <i class="icon ion-chatbox"></i>
+          Comment
+        </a>
+        <a class="tab-item">
+          <i class="icon ion-share"></i>
+          Share
+        </a>
+      </div>
+    </div>
+  </ion-content>
+</ion-modal-view>
