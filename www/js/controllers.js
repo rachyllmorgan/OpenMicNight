@@ -1,6 +1,6 @@
 angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB'])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout, ngFB) {
+.controller('AppCtrl', function($scope, $ionicModal, $location, ngFB) {
 
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -34,12 +34,13 @@ angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB
   //   console.log('Doing login', $scope.loginData);
 
     $scope.fbLogin = function () {
-      console.log("anything?")
       ngFB.login({scope: 'email,public_profile,user_friends'}).then(
         function (response) {
           if (response.status === 'connected') {
             console.log('Facebook login succeeded');
+            console.log('response.authResponse.accessToken', response.authResponse.accessToken);
             $scope.closeLogin();
+            $location.path('/app/profile');
           } else {
             alert('Facebook login failed');
           }
@@ -48,7 +49,25 @@ angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB
   // };
 })
 
-.controller('LocationsCtrl', function($scope, $ionicModal, allLocations) {
+.controller('ProfileCtrl', function ($scope, ngFB, storage) {
+  ngFB.api({
+    path: '/me',
+    params: {fields: 'id,name'}
+  }).then(
+    function (user) {
+        $scope.user = user;
+        console.log(user);
+        storage.set('userId', user.id);
+    },
+    function (error) {
+        alert('Facebook error: ' + error.error_description);
+    });
+})
+
+.controller('LocationsCtrl', function($scope, $ionicModal, allLocations, storage) {
+  $scope.userId = storage.get('userId');
+  console.log('$scope.userId', $scope.userId);
+
   $scope.locations = allLocations;
   console.log('$scope.locations', $scope.locations);
 

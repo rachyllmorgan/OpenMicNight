@@ -7,9 +7,9 @@
     <div class="list card">
       <div class="item">
         <h2><strong>{{barDetail.name}}</strong></h2>
-        <h3>{{barDetail.phone}}</h3>
+        <h3>Phone: <a class="ion-ios7-telephone" ng-href="tel: {{barDetail.phone}}">{{barDetail.phone}}</a></h3>
         <h3>{{barDetail.address}}</h3>
-        <p><a href='{{barDetail.website}}'>{{barDetail.website}}</a></p>
+        <p><a href='{{barDetail.website}}' target="_blank">{{barDetail.website}}</a></p>
       </div>
       <div class="item item-body" ng-repeat='mic_night in barDetail.mic_nights'>
         <h2><strong>{{mic_night.day_of_week}}'s</strong></h2>

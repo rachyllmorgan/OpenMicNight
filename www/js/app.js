@@ -44,15 +44,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngOpenFB'])
     }
   })
 
-  .state('app.browse', {
-    url: '/browse',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/browse.html'
-      }
-    }
-    })
-
   .state('app.locations', {
     url: "/locations",
     views: {
@@ -61,7 +52,33 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngOpenFB'])
         controller: 'LocationsCtrl'
       }
     }
-  });
+  })
+
+  .state('app.profile', {
+    url: "/profile",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/profile.html",
+        controller: "ProfileCtrl",
+        // access: {
+        //   requiresLogin: true
+        // }
+      }
+    }
+  })
+
+  .state('app.userlocations', {
+    url: "/:userId/locations",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/locations.html",
+        controller: 'LocationsCtrl',
+        access: {
+          requiresLogin: true
+        }
+      }
+    }
+  })
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/locations');
 });

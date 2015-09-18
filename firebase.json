@@ -1,0 +1,9 @@
+{
+  "firebase": "openmicnight",
+  "public": "/vagrant/OpenMicNight/www",
+  "ignore": [
+    "firebase.json",
+    "**/.*",
+    "**/node_modules/**"
+  ]
+}
