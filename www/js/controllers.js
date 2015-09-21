@@ -39,6 +39,7 @@ angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB
           if (response.status === 'connected') {
             console.log('Facebook login succeeded');
             console.log('response.authResponse.accessToken', response.authResponse.accessToken);
+            console.log('response', response);
             $scope.closeLogin();
             $location.path('/app/profile');
           } else {
@@ -59,6 +60,7 @@ angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB
         $scope.user = user;
         console.log(user);
         storage.set('userId', user.id);
+
         var ref = new Firebase('https://openmicnight.firebaseio.com/users');
         $scope.users = $firebaseArray(ref);
 
