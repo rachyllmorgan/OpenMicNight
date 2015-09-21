@@ -49,7 +49,8 @@ angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB
   // };
 })
 
-.controller('ProfileCtrl', function ($scope, ngFB, storage) {
+.controller('ProfileCtrl', function ($scope, ngFB, storage, $firebaseArray, $ionicModal) {
+
   ngFB.api({
     path: '/me',
     params: {fields: 'id,name'}
@@ -58,15 +59,44 @@ angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB
         $scope.user = user;
         console.log(user);
         storage.set('userId', user.id);
+        var ref = new Firebase('https://openmicnight.firebaseio.com/users');
+        $scope.users = $firebaseArray(ref);
+
+        $scope.users.$loaded()
+           .then(function (users) {
+            console.log(users)
+            var userExists = 0;
+              for (var i = 0; i < users.length; i++) {
+               console.log(users[i])
+              if(users[i].uid === user.id) {
+                userExists = 1;
+              } else {
+                console.log("New user: ", users[i].uid);
+              }
+               
+             }
+             console.log(userExists);
+             if (userExists === 0) {
+               $scope.users.$add({
+                 "name": user.name,
+                 "uid": user.id,
+               })
+             }
+           })
     },
     function (error) {
         alert('Facebook error: ' + error.error_description);
     });
+
+  // Add link for empty profile
+  for (var key in $scope.user) {
+    if ($scope.user[key] === undefined || $scope.user[key] === "") {
+      $scope.user[key] = "Add Link";
+    }
+  }
 })
 
-.controller('LocationsCtrl', function($scope, $ionicModal, allLocations, storage) {
-  $scope.userId = storage.get('userId');
-  console.log('$scope.userId', $scope.userId);
+.controller('LocationsCtrl', function($scope, $ionicModal, allLocations) {
 
   $scope.locations = allLocations;
   console.log('$scope.locations', $scope.locations);
@@ -104,3 +134,27 @@ angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB
     $scope.barDetail = bar;
   }
 })
+
+.controller('UserLocationsCtrl', function($scope, $firebaseArray, storage){
+  $scope.userId = storage.get("userId");
+
+  var ref = new Firebase("https://openmicnight.firebaseio.com/users");
+    $scope.users = $firebaseArray(ref);
+
+    $scope.users.$loaded()
+      .then(function (usersArray) {
+        for (var i = 0; i < usersArray.length; i ++) {
+          if (usersArray[i].uid === $scope.userId) {
+            console.log(usersArray[i].$id);
+
+            var ref = new Firebase("https://openmicnight.firebaseio.com/locations");
+            $scope.userLocation = $firebaseArray(ref);
+
+          }
+        }
+
+      })
+})
+
+
+

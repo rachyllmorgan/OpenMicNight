@@ -1,0 +1,249 @@
+{
+  "users": [
+    {
+      "name": "test name",
+      "profilePic": "image.url",
+      "uid": "facebook12421984791284781248"
+    }
+  ],
+  "locations": [
+    {
+      "name": "The Attic at Piranha's",
+      "address": "113 2nd Ave. North, Nashville, TN",
+      "phone": "(615) 296-3700",
+      "website": "",
+      "img": "https://nashvillelife.com/sites/default/files/THE_ATTIC.png",
+      "mic_nights": [{
+          "day_of_week": "Monday",
+          "time": "8PM",
+          "length_of_time": "2 songs",
+          "equipment_provided": "Not Available",
+          "music_genre": "All Genres",
+          "all_ages": "Yes",
+          "host": "Not Available",
+          "notes": "None Available"
+          }
+      ]
+    },
+    {
+      "name": "Bluebird Cafe",
+      "address": "4104 Hillsboro Road, Nashville, TN",
+      "phone": "(615) 383-1461",
+      "website": "www.bluebirdcafe.com",
+      "img": "https://s3.amazonaws.com/webassets.ticketmob.com/TS/images/ShowPosters/591D3A04-C2D0-E659-10643DCEE0A6C96F.jpg",
+      "mic_nights": [{
+          "day_of_week": "Monday",
+          "time": "6-9PM",
+          "length_of_time": "1-2 songs",
+          "equipment_provided": "Kawai keyboard, PA, mics and lines",
+          "music_genre": "All Genres",
+          "all_ages": "Yes",
+          "host": "Not Available",
+          "notes": "Sign up is now done by phone and begins at 11 am on the Monday you want to play.  The number is 615-943-8168."
+          },
+          {
+          "day_of_week": "Sunday",
+          "time": "8PM",
+          "length_of_time": "5 minutes",
+          "equipment_provided": "Kawai keyboard, PA, mics and lines",
+          "music_genre": "All Genres",
+          "all_ages": "Yes",
+          "host": "Not Available",
+          "notes": "Scheduled by audition only."
+          }
+      ]
+    },
+    {
+      "name": "Blue Bar",
+      "address": "1911 Broadway, Nashville, TN",
+      "phone": "(615) 327-8001",
+      "website": "www.myspace.com/bluebarnashville",
+      "img": "https://cdn.localeats.com/media/images/19586-1.jpg",
+      "mic_nights": [{
+          "day_of_week": "Tuesdays",
+          "time": "10PM",
+          "length_of_time": "5 minutes",
+          "equipment_provided": "Not Available",
+          "music_genre": "All Genres",
+          "all_ages": "Yes",
+          "host": "Barbara Cloyd",
+          "notes": "Be there by 9PM to sign up."
+          },
+          {
+          "day_of_week": "Wednesday",
+          "time": "8PM-12AM",
+          "length_of_time": "7 minutes",
+          "equipment_provided": "Not Available",
+          "music_genre": "All Genres",
+          "host": "Terri Jo Box",
+          "all_ages": "Yes",
+          "notes": "None Available"
+          }
+      ]
+    },
+    {
+      "name": "The Commodore Grille at the Holiday Inn Select, Vanderbilt",
+      "address": "2613 West End Ave, Nashville, TN",
+      "phone": "(615) 327-4707",
+      "website": "www.debichampion.com",
+      "img": "https://s3.amazonaws.com/gigdog.fm/photos/venue/thumb_Commodore_Grill.png",
+      "mic_nights": [{
+          "day_of_week": "Monday",
+          "time": "6PM",
+          "length_of_time": "3 songs",
+          "equipment_provided": "Not Available",
+          "music_genre": "All Genres",
+          "all_ages": "Yes",
+          "host": "Debi Champion",
+          "notes": "Be there by 9:00 PM to play at the late-night open mic, which serves as an audition for future bookings."
+          },
+          {
+          "day_of_week": "Tuesday",
+          "time": "7PM-11:30PM",
+          "length_of_time": "3 songs",
+          "equipment_provided": "Not Available",
+          "music_genre": "All Genres",
+          "all_ages": "Yes",
+          "host": "Not Available",
+          "notes": "None Available"
+          },
+          {
+          "day_of_week": "Wednesday",
+          "time": "6PM",
+          "length_of_time": "3 songs",
+          "equipment_provided": "Not Available",
+          "music_genre": "All Genres",
+          "all_ages": "Yes",
+          "host": "Debi Champion",
+          "notes": "Be there by 9:00 PM to play at the late-night open mic, which serves as an audition for future bookings."
+          },
+          {
+          "day_of_week": "Thursday",
+          "time": "6PM",
+          "length_of_time": "3 songs",
+          "equipment_provided": "Not Available",
+          "music_genre": "All Genres",
+          "all_ages": "Yes",
+          "host": "Not Available",
+          "notes": "Be there by 9:00 PM to play at the late-night open mic, which serves as an audition for future bookings."
+          },
+          {
+          "day_of_week": "Friday",
+          "time": "7PM-11:00PM",
+          "length_of_time": "1 hour",
+          "equipment_provided": "4 mics, 4 Di's",
+          "music_genre": "All Genres",
+          "all_ages": "Yes",
+          "host": "Not Available",
+          "notes": "The weekend shows are one hour sets with the last hours of the night for anyone that wants to play their original music only."
+          },
+          {
+          "day_of_week": "Saturday",
+          "time": "7PM-12AM",
+          "length_of_time": "3 songs",
+          "equipment_provided": "Not Available",
+          "music_genre": "All Genres",
+          "all_ages": "Yes",
+          "host": "Not Available",
+          "notes": "None Available"
+          },
+          {
+          "day_of_week": "Sunday",
+          "time": "6PM",
+          "length_of_time": "3 songs",
+          "equipment_provided": "Not Available",
+          "music_genre": "All Genres",
+          "all_ages": "Yes",
+          "host": "Not Available",
+          "notes": "Be there by 9:00 PM to play at the late-night open mic, which serves as an audition for future bookings."
+          }
+      ]
+    },
+    {
+      "name": "Dan McGuinness",
+      "address": "1538 Demonbreun St., Nashville, TN",
+      "phone": "(615) 252-1991",
+      "website": "www.danmcguinnesspub.com",
+      "img": "https://tickets.eventleus.com/tickets/pics/upload/images/mcguinness.png",
+      "mic_nights": [{
+          "day_of_week": "Monday",
+          "time": "7:30PM-Close",
+          "length_of_time": "4 songs",
+          "equipment_provided": "Not Available",
+          "music_genre": "All Genres",
+          "all_ages": "Yes",
+          "host": "Not Available",
+          "notes": "Women performers only"
+          },
+          {
+          "day_of_week": "Wednesday",
+          "time": "6PM-9PM",
+          "length_of_time": "Not Available",
+          "equipment_provided": "Not Available",
+          "music_genre": "All Genres",
+          "all_ages": "Yes",
+          "host": "Not Available",
+          "notes": "5PM-6PM is 'Network Time', 6PM-6:30PM show opens with Randy Finchum and Travis Bowlin, 6:30PM-7PM is the 'Rising Star' segment, 7PM-7:30PM is the 'Hit Songwriter' segment, 7:30PM-9PM is Open Mic(sign up at 6PM)"
+          }
+      ]
+    },
+    {
+      "name": "Douglas Corner Cafe",
+      "address": "2106-A 8th Ave. S., Nashville, TN",
+      "phone": "(615) 298-1688",
+      "website": "http://douglascorner.com/",
+      "img": "https://www.nowplayingnashville.com/sites/nowplayingnashville.com/images/org/30524/douglas_corner.jpg",
+      "mic_nights": [{
+          "day_of_week": "Tuesday",
+          "time": "8PM-Close",
+          "length_of_time": "2 songs in rounds of 4",
+          "equipment_provided": "Not Available",
+          "music_genre": "All Genres",
+          "all_ages": "Yes",
+          "host": "Rick Campbell",
+          "notes": "Must call (615) 292-2530 on Tuesdays between 2-6pm"
+          }
+      ]
+    }
+  ],
+  "days": [
+    {
+      "day_name": "Sunday",
+      "available_mic": [{
+          "venue": "The Commodore Grille at the Holiday Inn Select, Vanderbilt",
+          "time": "7PM-11:30PM",
+          "img": "https://s3.amazonaws.com/gigdog.fm/photos/venue/thumb_Commodore_Grill.png"
+        },
+        {
+          "venue": "Bluebird Cafe",
+          "time": "8PM",
+          "img": "https://s3.amazonaws.com/webassets.ticketmob.com/TS/images/ShowPosters/591D3A04-C2D0-E659-10643DCEE0A6C96F.jpg" 
+        }
+        ]
+    },
+    {
+      "day_name": "Monday",
+      "available_mic": [{
+          "venue": "The Attic at Piranha's",
+          "time": "8PM",
+          "img": "https://nashvillelife.com/sites/default/files/THE_ATTIC.png",
+          "time": "8PM",
+          "length_of_time": "2 songs",
+          "equipment_provided": "Not Available",
+          "music_genre": "All Genres",
+          "all_ages": "Yes"
+        },
+        {
+          "venue": "Bluebird Cafe",
+          "time": "6-9PM",
+          "img": "https://s3.amazonaws.com/webassets.ticketmob.com/TS/images/ShowPosters/591D3A04-C2D0-E659-10643DCEE0A6C96F.jpg" 
+        },
+        {
+          "venue": "Dan McGuinness",
+          "time": "7:30PM-Close",
+          "img": "https://tickets.eventleus.com/tickets/pics/upload/images/mcguinness.png"
+        }
+        ]
+    } 
+  ]
+}

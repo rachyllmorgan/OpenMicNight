@@ -2,7 +2,11 @@
   <ion-content>
     <ion-list>
       <ion-item ng-repeat="bar in locations"
-                ng-click='seeBarDetail(bar)'>{{bar.name}}</ion-item>
+                ng-click='seeBarDetail(bar)' class="item item-avatar item-icon-right" href="#">
+        <img src="{{bar.img}}">
+        {{bar.name}}
+        <i class="icon ion-chevron-right" style="color:#ccc; font-size:16px;"></i>
+      </ion-item>
     </ion-list>
   </ion-content>
 </ion-view>

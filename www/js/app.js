@@ -71,7 +71,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngOpenFB'])
     url: "/:userId/locations",
     views: {
       'menuContent': {
-        templateUrl: "templates/locations.html",
+        templateUrl: "templates/userlocations.html",
         controller: 'LocationsCtrl',
         access: {
           requiresLogin: true

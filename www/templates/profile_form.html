@@ -1,0 +1,28 @@
+<ion-modal-view>
+    <ion-header-bar>
+      <h1 class="title">Edit Profile</h1>
+      <button class="button" ng-click="modal.hide()">Close</button>
+    </ion-header-bar>
+  <ion-content>
+    <div class="list card">
+      <div class="item bar bar-header bar-danger">
+        <h1 class="title">{{user.name}}</h1>
+      </div>
+      <div>
+        <label class="item item-input item-select">
+          <div class="input-label">
+            Social Links
+          </div>
+          <select>
+            <option>Instagram</option>
+            <option>ReverbNation</option>
+            <option>Twitter</option>
+            <option>Personal Website</option>
+          </select>
+        </label>
+      </div>
+      <div>
+      </div>
+    </div>
+  </ion-content>
+</ion-modal-view>
