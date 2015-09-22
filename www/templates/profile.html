@@ -24,32 +24,27 @@
         {{user.phone}}
       </a>
 
-      <a class="item item-icon-left" href="#">
+      <a class="item item-icon-left" href="https://facebook.com/{{user.facebook}}" target="_blank">
         <i class="icon ion-social-facebook"></i>
         {{user.facebook}}
       </a>
 
-      <a class="item item-icon-left" href="#">
+      <a class="item item-icon-left" href="https://instagram.com/{{user.instagram}}/" target="_blank">
         <i class="icon ion-social-instagram"></i>
-        {{user.instagram}}
+        @{{user.instagram}}
       </a>
 
-      <a class="item item-icon-left" href="#">
+      <a class="item item-icon-left" href="#" target="_blank">
         <i class="icon ion-ios-mic"></i>
         {{user.reverbnation}}
       </a>
 
-      <a class="item item-icon-left" href="#">
+      <a class="item item-icon-left" href="#" target="_blank">
         <i class="icon ion-social-twitter"></i>
         {{user.twitter}}
       </a>
 
-      <a class="item item-icon-left" href="#">
-        <i class="icon ion-social-snapchat"></i>
-        {{user.snapchat}}
-      </a>
-
-      <a class="item item-icon-left" href="#">
+      <a class="item item-icon-left" href="http://www.linkedin.com/in/{{user.linkedin}}" target="_blank">
         <i class="icon ion-social-linkedin"></i>
         {{user.linkedin}}
       </a>
@@ -59,17 +54,16 @@
         Friends
         <span class="badge badge-assertive">0</span>
       </a> -->
-
-    </div>
-      <label class="item center">
-        <button class="button button-positive" ng-click="fbLogout()">
+      <div class="item center">
+        <button class="button button-small button-positive" ng-click='editProfile(user)'>
+          Edit Profile
+        </button>
+      </div>
+      <div class="item center">
+        <button class="button button-small button-positive" ng-click="fbLogout()">
         Logout
         </button>
-      </label>
-<!--     <div>
-      <button class="button button-full button-positive" ng-click='editProfile(user)'>
-        Edit Profile
-      </button>
-    </div> -->
+      </div>
+    </div>
   </ion-content>
 </ion-view>
