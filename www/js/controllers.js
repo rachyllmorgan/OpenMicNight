@@ -1,6 +1,20 @@
 angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB'])
 
-.controller('AppCtrl', function($scope, $ionicModal, $location, ngFB) {
+.run(['storage', function(storage) {
+   var ref = new Firebase("https://openmicnight.firebaseio.com/");
+   console.log("authdata", ref.getAuth());
+
+   // auth = $firebaseAuth(ref);
+   var user = ref.getAuth();
+
+   if (user === null) {
+
+     } else {
+       storage.set("userId", user.uid);
+     }
+}])
+
+.controller('AppCtrl', function($scope, $ionicModal, $location, ngFB, $firebaseArray, storage) {
 
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -8,6 +22,7 @@ angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB
   // listen for the $ionicView.enter event:
   //$scope.$on('$ionicView.enter', function(e) {
   //});
+  
 
   // Form data for the login modal
   $scope.loginData = {};
@@ -29,73 +44,105 @@ angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB
     $scope.modal.show();
   };
 
-  // Perform the login action when the user submits the login form
-  // $scope.doLogin = function() {
-  //   console.log('Doing login', $scope.loginData);
-
-    $scope.fbLogin = function () {
-      ngFB.login({scope: 'email,public_profile,user_friends'}).then(
-        function (response) {
-          if (response.status === 'connected') {
-            console.log('Facebook login succeeded');
-            console.log('response.authResponse.accessToken', response.authResponse.accessToken);
-            console.log('response', response);
-            $scope.closeLogin();
-            $location.path('/app/profile');
-          } else {
-            alert('Facebook login failed');
-          }
-        });
-    };
-  // };
-})
-
-.controller('ProfileCtrl', function ($scope, ngFB, storage, $firebaseArray, $ionicModal) {
+  $scope.fbLogin = function () {
+    ngFB.login({scope: 'email,public_profile,user_friends'}).then(
+      function (response) {
+        if (response.status === 'connected') {
+          console.log('Facebook login succeeded');
+          console.log('response.authResponse.accessToken', response.authResponse.accessToken);
+          console.log('response', response);
+          $scope.closeLogin();
+          $location.path("/app/profile");
+        } else {
+          console.log('Facebook login failed');
+        }
+      });
+  };
 
   ngFB.api({
     path: '/me',
-    params: {fields: 'id,name'}
+    params: {fields: 'id,name,picture'}
   }).then(
     function (user) {
-        $scope.user = user;
-        console.log(user);
-        storage.set('userId', user.id);
+      $scope.user = user;
+      console.log(user);
+      storage.set('userId', user.id);
 
-        var ref = new Firebase('https://openmicnight.firebaseio.com/users');
-        $scope.users = $firebaseArray(ref);
+      var ref = new Firebase('https://openmicnight.firebaseio.com/users');
+      $scope.users = $firebaseArray(ref);
 
-        $scope.users.$loaded()
-           .then(function (users) {
-            console.log(users)
-            var userExists = 0;
-              for (var i = 0; i < users.length; i++) {
-               console.log(users[i])
-              if(users[i].uid === user.id) {
-                userExists = 1;
-              } else {
-                console.log("New user: ", users[i].uid);
-              }
-               
-             }
-             console.log(userExists);
-             if (userExists === 0) {
-               $scope.users.$add({
-                 "name": user.name,
-                 "uid": user.id,
-               })
-             }
-           })
+  // prevent duplicate users
+      $scope.users.$loaded()
+        .then(function (users) {
+          console.log("users", users)
+          var userExists = 0;
+          for (var i = 0; i < users.length; i++) {
+            if(users[i].uid === user.id) {
+              userExists = 1;
+            } else {
+              console.log("New user ID: ", users[i].uid);
+            }
+          }
+          console.log(userExists);
+          if (userExists === 0) {
+            $scope.users.$add({
+              "name": user.name,
+              "uid": user.id
+            })
+          }
+        })
     },
     function (error) {
-        alert('Facebook error: ' + error.error_description);
+      console.log('Facebook error: ' + error.error_description);
     });
 
-  // Add link for empty profile
-  for (var key in $scope.user) {
-    if ($scope.user[key] === undefined || $scope.user[key] === "") {
-      $scope.user[key] = "Add Link";
-    }
-  }
+  $scope.userId = storage.get('userId');
+})
+
+.controller('ProfileCtrl', function ($scope, ngFB, storage, $firebaseArray, $firebaseObject, $location) {
+
+  $scope.userId = storage.get("userId");
+  console.log("$scope.userId", $scope.userId);
+
+  var ref = new Firebase('https://openmicnight.firebaseio.com/users');
+  $scope.users = $firebaseArray(ref);
+
+  $scope.users.$loaded()
+    .then(function (users) {
+      console.log("users", users)
+      for (var i = 0; i < users.length; i++) {
+        if(users[i].uid === $scope.userId) {
+          $scope.userFireId = users[i].$id;
+          console.log("$scope.userFireId", $scope.userFireId)
+          console.log("Match");
+
+          var ref = new Firebase('https://openmicnight.firebaseio.com/users/' + $scope.userFireId);
+          $scope.user = $firebaseObject(ref);
+          console.log("$scope.user", $scope.user);
+
+        } else {
+          console.log("No Match");
+        }
+      }
+    })
+    .then(function(){
+    // Add link for empty profile
+      for (var key in $scope.user) {
+        if ($scope.user[key] === undefined || $scope.user[key] === "") {
+          $scope.user[key] = "Add Link";
+        }
+      }
+    })
+
+// Currently redirecting to facebook home page
+  // $scope.fbLogout = function(user) {
+  //   ngFB.logout(user).then(
+  //     function() {
+  //       console.log('Logout successful');
+  //     }
+  //   )
+  // }
+
 })
 
 .controller('LocationsCtrl', function($scope, $ionicModal, allLocations) {
@@ -135,27 +182,6 @@ angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB
     $scope.modal.show();
     $scope.barDetail = bar;
   }
-})
-
-.controller('UserLocationsCtrl', function($scope, $firebaseArray, storage){
-  $scope.userId = storage.get("userId");
-
-  var ref = new Firebase("https://openmicnight.firebaseio.com/users");
-    $scope.users = $firebaseArray(ref);
-
-    $scope.users.$loaded()
-      .then(function (usersArray) {
-        for (var i = 0; i < usersArray.length; i ++) {
-          if (usersArray[i].uid === $scope.userId) {
-            console.log(usersArray[i].$id);
-
-            var ref = new Firebase("https://openmicnight.firebaseio.com/locations");
-            $scope.userLocation = $firebaseArray(ref);
-
-          }
-        }
-
-      })
 })
 
 

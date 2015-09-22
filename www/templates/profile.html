@@ -8,7 +8,7 @@
     <div id="profile-bg"></div>
     <div id="content">
       <div id="profile-info">
-        <img id="profile-image" src="https://graph.facebook.com/{{user.id}}/picture?width=300&height=300">
+        <img id="profile-image" src="https://graph.facebook.com/{{user.uid}}/picture?width=300&height=300">
         <h3 id="profile-name">{{user.name}}</h3>
       </div>
     </div>
@@ -62,7 +62,7 @@
 
     </div>
       <label class="item center">
-        <button class="button button-block button-positive" ng-click="fbLogout()">
+        <button class="button button-positive" ng-click="fbLogout()">
         Logout
         </button>
       </label>
