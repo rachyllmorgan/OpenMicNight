@@ -38,66 +38,62 @@ angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB
       function (authdata) {
         if (authdata.status === 'connected') {
           console.log('Facebook login succeeded');
+          ngFB.api({
+            path: '/me',
+            params: {fields: 'id,name'}
+          }).then(
+            function (user) {
+              if (user !== null){
+                console.log(user);
+                $scope.user = user;
+                storage.set('userId', user.id);
+
+                var ref = new Firebase('https://openmicnight.firebaseio.com/users');
+                $scope.users = $firebaseArray(ref);
+
+            // prevent duplicate users
+                $scope.users.$loaded()
+                  .then(function (users) {
+                    var userExists = 0;
+                    for (var i = 0; i < users.length; i++) {
+                      if(users[i].uid === user.id) {
+                        userExists = 1;
+
+                       // store firebase ID
+                        $scope.userFireId = users[i].$id;
+                        storage.set('firebaseId', $scope.userFireId);
+                        console.log("$scope.userFireId", $scope.userFireId)
+                        $location.path('app/' + $scope.userId + '/profile');
+                      } else {
+                        console.log("New user ID: ", users[i].uid);
+                      }
+                    }
+                    console.log(userExists);
+                    if (userExists === 0) {
+                      $scope.users.$add({
+                        "name": user.name,
+                        "uid": user.id,
+                        "email": "",
+                        "phone": "",
+                        "facebook": "",
+                        "instagram": "",
+                        "reverbnation": "",
+                        "twitter": "",
+                        "linkedin": "",
+                        "favorites": []
+                      })
+                    }
+                  })
+              }
+              else {
+                console.log(user);
+              }
+            }
+          )
         } else {
           console.log('Facebook login failed');
         }
       })
-      .then(
-        ngFB.api({
-          path: '/me',
-          params: {fields: 'id,name'}
-        }).then(
-          function (user) {
-            if (user !== null){
-              console.log(user);
-              $scope.user = user;
-              storage.set('userId', user.id);
-
-              var ref = new Firebase('https://openmicnight.firebaseio.com/users');
-              $scope.users = $firebaseArray(ref);
-
-          // prevent duplicate users
-              $scope.users.$loaded()
-                .then(function (users) {
-                  var userExists = 0;
-                  for (var i = 0; i < users.length; i++) {
-                    if(users[i].uid === user.id) {
-                      userExists = 1;
-
-                     // store firebase ID
-                      $scope.userFireId = users[i].$id;
-                      storage.set('firebaseId', $scope.userFireId);
-                      console.log("$scope.userFireId", $scope.userFireId)
-
-                      $location.path('app/' + $scope.userId + '/profile');
-
-                    } else {
-                      console.log("New user ID: ", users[i].uid);
-                    }
-                  }
-                  console.log(userExists);
-                  if (userExists === 0) {
-                    $scope.users.$add({
-                      "name": user.name,
-                      "uid": user.id,
-                      "email": "",
-                      "phone": "",
-                      "facebook": "",
-                      "instagram": "",
-                      "reverbnation": "",
-                      "twitter": "",
-                      "linkedin": "",
-                      "favorites": []
-                    })
-                  }
-                })
-            }
-            else {
-              console.log(user);
-            }
-          }
-        )
-      )
     $scope.closeLogin();
   };
 })
