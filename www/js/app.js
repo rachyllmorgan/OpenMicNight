@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'ngOpenFB', 'firebase'])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'ngOpenFB', 'firebase'])
 
 .run(function($ionicPlatform, ngFB) {
   
@@ -26,6 +26,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngOpenFB', 'firebase
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
+
   $stateProvider
 
   .state('app', {
@@ -55,12 +56,14 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngOpenFB', 'firebase
   })
 
   .state('app.profile', {
-    url: "/profile",
+    url: "/:userId/profile",
     views: {
       'menuContent': {
         templateUrl: "templates/profile.html",
         controller: "ProfileCtrl",
-        authRequired: true;
+        access: {
+          requiresLogin: true
+        }
       }
     }
   })

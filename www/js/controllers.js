@@ -4,9 +4,11 @@ angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB
    var ref = new Firebase("https://openmicnight.firebaseio.com/");
    console.log("auth response", ref.getAuth());
 
+   // auth = $firebaseAuth(ref);
    var user = ref.getAuth();
 
    if (user === null) {
+
      } else {
        storage.set("userId", user.uid);
      }
@@ -31,69 +33,76 @@ angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB
   };
 
   $scope.fbLogin = function () {
-    ngFB.login({scope: 'email,public_profile,user_friends'}).then(
-      function (response) {
-        if (response.status === 'connected') {
+    ngFB.login({scope: 'email,public_profile,user_friends'})
+      .then(
+      function (authdata) {
+        if (authdata.status === 'connected') {
           console.log('Facebook login succeeded');
-          console.log('response', response);
-          $scope.closeLogin();
-          $location.path("/app/profile");
         } else {
           console.log('Facebook login failed');
         }
-      });
-  };
+      })
+      .then(
+        ngFB.api({
+          path: '/me',
+          params: {fields: 'id,name'}
+        }).then(
+          function (user) {
+            if (user !== null){
+              console.log(user);
+              $scope.user = user;
+              storage.set('userId', user.id);
 
-  ngFB.api({
-    path: '/me',
-    params: {fields: 'id,name'}
-  }).then(
-    function (user) {
-      $scope.user = user;
-      console.log(user);
-      storage.set('userId', user.id);
+              var ref = new Firebase('https://openmicnight.firebaseio.com/users');
+              $scope.users = $firebaseArray(ref);
 
-      var ref = new Firebase('https://openmicnight.firebaseio.com/users');
-      $scope.users = $firebaseArray(ref);
+          // prevent duplicate users
+              $scope.users.$loaded()
+                .then(function (users) {
+                  var userExists = 0;
+                  for (var i = 0; i < users.length; i++) {
+                    if(users[i].uid === user.id) {
+                      userExists = 1;
 
-  // prevent duplicate users
-      $scope.users.$loaded()
-        .then(function (users) {
-          console.log("users", users)
-          var userExists = 0;
-          for (var i = 0; i < users.length; i++) {
-            if(users[i].uid === user.id) {
-              userExists = 1;
-              $scope.userFireId = users[i].$id;
-              // store firebase ID
-              storage.set('firebaseId', $scope.userFireId);
-              console.log("$scope.userFireId", $scope.userFireId)
-            } else {
-              console.log("New user ID: ", users[i].uid);
+                     // store firebase ID
+                      $scope.userFireId = users[i].$id;
+                      storage.set('firebaseId', $scope.userFireId);
+                      console.log("$scope.userFireId", $scope.userFireId)
+
+                      $location.path('app/' + $scope.userId + '/profile');
+
+                    } else {
+                      console.log("New user ID: ", users[i].uid);
+                    }
+                  }
+                  console.log(userExists);
+                  if (userExists === 0) {
+                    $scope.users.$add({
+                      "name": user.name,
+                      "uid": user.id,
+                      "email": "",
+                      "phone": "",
+                      "facebook": "",
+                      "instagram": "",
+                      "reverbnation": "",
+                      "twitter": "",
+                      "linkedin": "",
+                      "favorites": []
+                    })
+                  }
+                })
+            }
+            else {
+              console.log(user);
             }
           }
-          console.log(userExists);
-          if (userExists === 0) {
-            $scope.users.$add({
-              "name": user.name,
-              "uid": user.id,
-              "email": "",
-              "phone": "",
-              "facebook": "",
-              "instagram": "",
-              "reverbnation": "",
-              "twitter": "",
-              "linkedin": ""
-            })
-          }
-        })
-    },
-    function (error) {
-      console.log('Facebook error: ' + error.error_description);
-    });
+        )
+      )
+    $scope.closeLogin();
+  };
 })
 
-.controller('ProfileCtrl', function ($scope, ngFB, storage, $firebaseArray, $firebaseObject, $location, $ionicModal) {
+.controller('ProfileCtrl', function($scope, ngFB, storage, $firebaseArray, $firebaseObject, $location, $ionicModal) {
   
   $scope.userId = storage.get("userId");
   $scope.userFireId = storage.get("firebaseId");
@@ -109,10 +118,6 @@ angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB
       console.log("users", users)
       for (var i = 0; i < users.length; i++) {
         if(users[i].uid === $scope.userId) {
-          // $scope.userFireId = users[i].$id;
-          // console.log("$scope.userFireId", $scope.userFireId)
-          // // store firebase ID
-          // storage.set('firebaseId', $scope.userFireId);
           console.log("Match");
 
           var ref = new Firebase('https://openmicnight.firebaseio.com/users/' + $scope.userFireId);
@@ -125,6 +130,7 @@ angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB
       }
     })
     .then(function(){
+
     // Add link for empty profile
       for (var key in $scope.user) {
         if ($scope.user[key] === undefined || $scope.user[key] === "") {
@@ -132,6 +138,14 @@ angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB
         }
       }
     })
+
+  $scope.fbLogout = function(){
+    ngFB.logout().then(
+      function() {
+          console.log('Logout successful');
+      }
+    )
+  }
 
   // Open edit profile modal
   $ionicModal.fromTemplateUrl('templates/profile_form.html', {
@@ -156,7 +170,6 @@ angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB
   $scope.$on('$ionicView.enter', function(e) {
 
     $scope.locations = allLocations;
-    console.log('$scope.locations', $scope.locations);
 
     $ionicModal.fromTemplateUrl('templates/bar.html', {
         scope: $scope,
@@ -217,15 +230,8 @@ angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB
     var ref = new Firebase('https://openmicnight.firebaseio.com/users');
     $scope.users = $firebaseArray(ref);
 
-    var update = $scope.users.$getRecord(user)
-    update.value = $scope.value;
-    $scope.users.$save(update)
-      .then(function(){
-        console.log("update successful");
-      })
     $scope.closeModal();
   }
 })
-
 
 
