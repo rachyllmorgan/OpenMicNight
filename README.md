@@ -1,3 +1,3 @@
 # OpenMicNight
 
-Front End Capstone
+Front End Capstone w/ Ionic
