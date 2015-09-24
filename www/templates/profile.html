@@ -26,15 +26,15 @@
         <i class="icon ion-social-facebook padding large"></i>
       </a>
 
-      <a href="https://instagram.com/{{user.instagram}}/" target="_blank">
-        <i class="icon ion-social-instagram padding large"></i>
+      <a href="https://www.instagram.com/{{user.instagram}}" target="_blank">
+        <i class="icon ion-social-instagram padding large" ></i>
       </a>
 
-      <a href="#" target="_blank">
+      <a href="https://www.reverbnation.com/{{user.instagram}}" target="_blank">
         <i class="icon ion-ios-mic padding large"></i>
       </a>
 
-      <a href="#" target="_blank">
+      <a href="http://www.twitter.com/{{user.twitter}}" target="_blank">
         <i class="icon ion-social-twitter padding large"></i>
       </a>
 
@@ -44,24 +44,18 @@
 
     </div>
 
-        <div class="row responsive-sm">
-          <a class="item item-avatar col" href="#" ng-repeat="friend in friends">
-            <img src="https://graph.facebook.com/{{friend.uid}}/picture?width=300&height=300">
-          </a>
-        </div>
-
 <!--       <a class="item item-icon-left" href="#">
         <i class="icon ion-person-stalker"></i>
         Friends
         <span class="badge badge-assertive">0</span>
       </a> -->
       <div class="item center">
-        <button class="button button-small button-positive" ng-click='editProfile(user)'>
+        <button class="button button-small button-dark" ng-click='editProfile(user)'>
           Edit Profile
         </button>
       </div>
       <div class="item center">
-        <button class="button button-small button-positive" ng-click="fbLogout(user)">
+        <button class="button button-small button-assertive" ng-click="fbLogout(user)">
         Logout
         </button>
       </div>

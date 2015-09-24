@@ -68,6 +68,14 @@
   padding: auto;
 }
 
+.profInput {
+  margin: auto 0 auto 0;
+}
+
+.float_right {
+  float: right;
+}
+
 @media screen and (min-width: 320px) {
   .large {
     display: inline-block;

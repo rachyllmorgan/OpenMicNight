@@ -70,7 +70,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     url: '/:userId/social',
     views: {
       'menuContent': {
-        templateUrl: 'templates/social.html'
+        templateUrl: 'templates/social.html',
+        controller: "SocialCtrl",
+        authRequired: true
       }
     }
   })

@@ -13,39 +13,35 @@
         <div class="list">
           <label class="item item-input item-stacked-label">
             <span class="input-label">Name</span>
-            <input type="text" value='name' ng-model="name.text" placeholder="John Smith" required>
+            <input type="text" ng-model="user.name" placeholder="{{user.name}}">
           </label>
           <label class="item item-input item-stacked-label">
             <span class="input-label">Email</span>
-            <input name="input" value='email' ng-model="email.text" placeholder="johnsmith@example.com" required>
+            <input type="text" ng-model="user.email" placeholder="{{user.email}}">
           </label>
           <label class="item item-input item-stacked-label">
             <span class="input-label">Phone</span>
-            <input type="tel" placeholder="(555)555-5555">
-          </label>
-          <label class="item item-input item-stacked-label">
-            <span class="input-label">Facebook</span>
-            <input type="text" placeholder="https://facebook.com/johnsmith">
+            <input type="tel" ng-model="user.phone" placeholder="{{user.phone}}">
           </label>
           <label class="item item-input item-stacked-label">
             <span class="input-label">Instagram</span>
-            <input type="text" placeholder="https://instagram.com/johnsmith">
+            <input type="text" ng-model="user.instagram" placeholder="https://instagram.com/{{user.instagram}}">
           </label>
           <label class="item item-input item-stacked-label">
             <span class="input-label">ReverbNation</span>
-            <input type="text" placeholder="https://reverbnation.com/johnsmith">
+            <input type="text" ng-model="user.reverbnation" placeholder="https://reverbnation.com/{{user.reverbnation}}">
           </label>
           <label class="item item-input item-stacked-label">
             <span class="input-label">Twitter</span>
-            <input type="text" placeholder="https://twitter.com/johnsmith">
+            <input type="text" ng-model="user.twitter" placeholder="https://twitter.com/{{user.twitter}}">
           </label>
           <label class="item item-input item-stacked-label">
             <span class="input-label">LinkedIn</span>
-            <input type="text" placeholder="https://facebook.com/http://www.linkedin.com/in/johnsmith">
+            <input type="text" class="col" ng-model="user.linkedin" placeholder="http://www.linkedin.com/in/{{user.linkedin}}">
           </label>
         </div>
         <div class="item center">
-          <button class="button button-small button-positive" ng-click="profileChanges()">
+          <button class="button button-small button-positive" ng-click="profileChanges(value)">
           Save Changes
           </button>
         </div>

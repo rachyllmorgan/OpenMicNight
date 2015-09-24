@@ -3,7 +3,7 @@
     <ion-list>
       <ion-item ng-repeat="user in users"
                 ng-click='seeUserDetail(user)' class="item item-avatar item-icon-right" href="#">
-        <img src="{{user.picture}}">
+        <img src="https://graph.facebook.com/{{user.uid}}/picture?width=300&height=300">
         {{user.name}}
         <i class="icon ion-chevron-right" style="color:#ccc; font-size:16px;"></i>
       </ion-item>
