@@ -61,25 +61,20 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       'menuContent': {
         templateUrl: "templates/profile.html",
         controller: "ProfileCtrl",
-        access: {
-          requiresLogin: true
-        }
+        authRequired: true
       }
     }
   })
 
-  .state('app.userlocations', {
-    url: "/:userId/locations",
+  .state('app.social', {
+    url: '/:userId/social',
     views: {
       'menuContent': {
-        templateUrl: "templates/userlocations.html",
-        controller: 'LocationsCtrl',
-        access: {
-          requiresLogin: true
-        }
+        templateUrl: 'templates/social.html'
       }
     }
   })
+
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/locations');
 });

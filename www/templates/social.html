@@ -1,0 +1,12 @@
+<ion-view view-title="Social">
+  <ion-content>
+    <ion-list>
+      <ion-item ng-repeat="user in users"
+                ng-click='seeUserDetail(user)' class="item item-avatar item-icon-right" href="#">
+        <img src="{{user.picture}}">
+        {{user.name}}
+        <i class="icon ion-chevron-right" style="color:#ccc; font-size:16px;"></i>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

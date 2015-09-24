@@ -1,20 +1,25 @@
 angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB'])
 
 .run(['storage', function(storage) {
-   var ref = new Firebase("https://openmicnight.firebaseio.com/");
-   console.log("auth response", ref.getAuth());
+  var ref = new Firebase("https://openmicnight.firebaseio.com/");
+   
 
    // auth = $firebaseAuth(ref);
-   var user = ref.getAuth();
+  var user = ref.getAuth();
 
-   if (user === null) {
-
-     } else {
-       storage.set("userId", user.uid);
-     }
+  if (user === null) {
+    console.log("auth response", ref.getAuth());
+    } else {
+      storage.set("userId", user.uid);
+    }
 }])
 
 .controller('AppCtrl', function($scope, $ionicModal, $location, ngFB, $firebaseArray, storage) {
+
+  $scope.userId = storage.get("userId");
+
+  var ref = new Firebase('https://openmicnight.firebaseio.com/users');
+  $scope.users = $firebaseArray(ref);
 
   $ionicModal.fromTemplateUrl('templates/login.html', {
     scope: $scope
@@ -38,18 +43,17 @@ angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB
       function (authdata) {
         if (authdata.status === 'connected') {
           console.log('Facebook login succeeded');
+          console.log(authdata.authResponse.accessToken);
+
           ngFB.api({
             path: '/me',
-            params: {fields: 'id,name'}
+            params: {fields: 'id,name,email,link,friends'}
           }).then(
             function (user) {
               if (user !== null){
                 console.log(user);
                 $scope.user = user;
                 storage.set('userId', user.id);
-
-                var ref = new Firebase('https://openmicnight.firebaseio.com/users');
-                $scope.users = $firebaseArray(ref);
 
             // prevent duplicate users
                 $scope.users.$loaded()
@@ -60,33 +64,34 @@ angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB
                         userExists = 1;
 
                        // store firebase ID
-                        $scope.userFireId = users[i].$id;
-                        storage.set('firebaseId', $scope.userFireId);
-                        console.log("$scope.userFireId", $scope.userFireId)
+                        storage.set('firebaseId', users[i].$id);
+                        console.log("firebaseId", users[i].$id)
+
                         $location.path('app/' + $scope.userId + '/profile');
+
                       } else {
                         console.log("New user ID: ", users[i].uid);
                       }
                     }
+                    // create new user
                     console.log(userExists);
                     if (userExists === 0) {
                       $scope.users.$add({
                         "name": user.name,
                         "uid": user.id,
-                        "email": "",
+                        "email": user.email,
                         "phone": "",
-                        "facebook": "",
+                        "facebook": user.link,
                         "instagram": "",
                         "reverbnation": "",
                         "twitter": "",
                         "linkedin": "",
-                        "favorites": []
+                        "favorites": [],
+                        "friends": user.friends.data
                       })
+                    $location.path('app/' + $scope.userId + '/profile');
                     }
                   })
-              }
-              else {
-                console.log(user);
               }
             }
           )
@@ -99,7 +104,8 @@ angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB
 })
 
 .controller('ProfileCtrl', function($scope, ngFB, storage, $firebaseArray, $firebaseObject, $location, $ionicModal) {
-  
+
+  var authRequired = true;
   $scope.userId = storage.get("userId");
   $scope.userFireId = storage.get("firebaseId");
 
@@ -111,6 +117,7 @@ angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB
 
   $scope.users.$loaded()
     .then(function (users) {
+      $scope.userId = storage.get("userId");
       console.log("users", users)
       for (var i = 0; i < users.length; i++) {
         if(users[i].uid === $scope.userId) {
@@ -134,13 +141,13 @@ angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB
         }
       }
     })
+      // why am i getting myself as a friend???
+  var friendref = new Firebase('https://openmicnight.firebaseio.com/users/' + $scope.userFireId + '/friends');
+  $scope.friends = $firebaseArray(ref); 
+  console.log ($firebaseArray(ref));
 
   $scope.fbLogout = function(){
-    ngFB.logout().then(
-      function() {
-          console.log('Logout successful');
-      }
-    )
+    console.log('Logout here');
   }
 
   // Open edit profile modal

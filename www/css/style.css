@@ -52,15 +52,46 @@
   box-shadow: 0px 0px 4px rgba(0,0,0,0.7);
 }
 
+#friendShelf {
+  padding: auto;
+}
+
+#friendShelf > a.item {
+  display: inline;
+  margin: auto;
+  font-size: 50px;
+}
+
 /*General*/
 .center{
   text-align: center;
-  padding: 5% 0;
+  padding: auto;
 }
 
-.input-box { position: relative; }
+@media screen and (min-width: 320px) {
+  .large {
+    display: inline-block;
+    font-size: 30px;
+    color: black;
+    margin: auto;
+  }
+}
 
-input { display: block; border: 1px solid #d7d6d6; background: #fff; padding: 10px 10px 10px 20px; width: 195px; }
+@media screen and (min-width: 640px) {
+  .large {
+    display: inline-block;
+    font-size: 40px;
+    color: black;
+    margin: 3%;
+  }
+}
 
-.unit { position: absolute; display: block; left: 5px; top: 10px; z-index: 9; }
+@media screen and (min-width: 900px) {
+  .large {
+    display: inline-block;
+    font-size: 50px;
+    color: black;
+    margin: 3%;
+  }
+}
 
