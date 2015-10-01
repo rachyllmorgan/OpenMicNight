@@ -6,7 +6,7 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'ngOpenFB', 'firebase'])
 
-.run(function($ionicPlatform, ngFB) {
+.run(function($ionicPlatform, ngFB, $rootScope) {
   
   ngFB.init({appId: '615934731842861'});
 
@@ -21,6 +21,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     if (window.StatusBar) {
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
+    }
+  });
+
+        //stateChange event
+  $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
+    if (toState.authRequired && !userId){ //Assuming the AuthService holds authentication logic
+      // User isn’t authenticated
+      $state.transitionTo("/locations");
+      event.preventDefault(); 
     }
   });
 })
@@ -56,7 +65,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
   })
 
   .state('app.profile', {
-    url: "/:userId/profile",
+    url: "/profile/:userId",
     views: {
       'menuContent': {
         templateUrl: "templates/profile.html",
@@ -67,12 +76,11 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
   })
 
   .state('app.social', {
-    url: '/:userId/social',
+    url: '/social',
     views: {
       'menuContent': {
         templateUrl: 'templates/social.html',
-        controller: "SocialCtrl",
-        authRequired: true
+        controller: "SocialCtrl"
       }
     }
   })

@@ -5,6 +5,8 @@ angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB
   var ref = new Firebase('https://openmicnight.firebaseio.com/users');
   $scope.users = $firebaseArray(ref);
 
+  $scope.userId = window.localStorage.getItem("userId");
+
   $ionicModal.fromTemplateUrl('templates/login.html', {
     scope: $scope
   }).then(function(modal) {
@@ -27,7 +29,7 @@ angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB
       function (authdata) {
         if (authdata.status === 'connected') {
           console.log('Facebook login succeeded');
-          console.log(authdata.authResponse.accessToken);
+          window.localStorage.setItem("userAccessToken", authdata.authResponse.accessToken);
 
           ngFB.api({
             path: '/me',
@@ -47,11 +49,11 @@ angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB
                       if(users[i].uid === user.id) {
                         userExists = 1;
 
-                       // store firebase ID
+                      // store firebase ID
                         window.localStorage.setItem('firebaseId', users[i].$id);
                         console.log("firebaseId", users[i].$id);
 
-                        $location.path('app/' + $scope.userId + '/profile');
+                        $location.path('app/profile/:userId');
 
                       } else {
                         console.log("New user ID: ", users[i].uid);
@@ -70,10 +72,14 @@ angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB
                         "reverbnation": "",
                         "twitter": "",
                         "linkedin": "",
+                        "soundcloud": "",
+                        "youtube": "",
                         "favorites": [],
-                        "friends": user.friends.data
+                        "genres": [],
+                        "contacts": user.friends.data
+
                       })
-                    $location.path('app/' + $scope.userId + '/profile');
+                    $location.path('app/profile/:userId');
                     }
                   })
               }
@@ -91,12 +97,36 @@ angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB
 
   $scope.$on('$ionicView.enter', function(e) {
 
-    var authRequired = true;
     $scope.userId = window.localStorage.getItem("userId");
     $scope.userFireId = window.localStorage.getItem("firebaseId");
 
     console.log("$scope.userId", $scope.userId);
     console.log("$scope.userFireId", $scope.userFireId);
+
+//  ******************** want login to pop up if not logged in ****************************
+    if ($scope.userId === null || $scope.userId === undefined) {
+
+      console.log("yes");
+
+      $ionicModal.fromTemplateUrl('templates/login.html', {
+        scope: $scope
+      }).then(function(modal) {
+        $scope.modal = modal;
+      });
+
+      // Triggered in the login modal to close it
+      $scope.closeLogin = function() {
+        $scope.modal.hide();
+      };
+
+      // Open the login modal
+      $scope.login = function() {
+        $scope.modal.show();
+      };
+
+    } else {
+      console.log("no");
+    }
 
     var ref = new Firebase('https://openmicnight.firebaseio.com/users');
     $scope.users = $firebaseArray(ref);
@@ -124,14 +154,16 @@ angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB
         for (var key in $scope.user) {
           if ($scope.user[key] === undefined || $scope.user[key] === "") {
             $scope.user[key] = "No User Information";
-          }
+          } 
         }
       })
-        // why am i getting myself as a friend???
-    var friendref = new Firebase('https://openmicnight.firebaseio.com/users/' + $scope.userFireId + '/friends');
-    $scope.friends = $firebaseArray(ref); 
+
+
+    var friendref = new Firebase('https://openmicnight.firebaseio.com/users/' + $scope.userFireId + '/contacts');
+    $scope.friends = $firebaseArray(friendref); 
     console.log ("$scope.friends", $scope.friends, $scope.userFireId);
 
+// ***************** reseting localStorage but not removing prof photo or bio info ********** //
     $scope.fbLogout = function(){
       window.localStorage.setItem("userId", null);
       window.localStorage.setItem("firebaseId", null);
@@ -171,6 +203,23 @@ angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB
   var ref = new Firebase('https://openmicnight.firebaseio.com/users/' + $scope.firebaseId);
   $scope.user = $firebaseObject(ref);
 
+  $scope.genres = [
+    'Acoustic', 
+    'Alternative', 
+    'Americana', 
+    'Bluegrass', 
+    'Blues', 
+    'Country', 
+    'Folk', 
+    'Hard Rock', 
+    'Hip Hop', 
+    'Indie', 
+    'Jazz', 
+    'Rap', 
+    'Rock', 
+    'Spoken Word'
+  ];
+
   $scope.closeModal = function() {
     $scope.modal.hide();
   };
@@ -179,6 +228,7 @@ angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB
     console.log("save changes clicked");
 
     $scope.user.$save().then(function(ref) {
+      console.log("$scope.user", $scope.user);
       console.log("ref", ref);
     }, function(error) {
       console.log("promise error", error);
@@ -188,10 +238,15 @@ angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB
   }
 })
 
-.controller('LocationsCtrl', function($scope, $ionicModal, allLocations) {
+.controller('LocationsCtrl', function($scope, $ionicModal, allLocations, ngFB) {
+  
   $scope.$on('$ionicView.enter', function(e) {
 
     $scope.locations = allLocations;
+    window.localStorage.getItem("userAccessToken");
+    console.log("$scope.userAccessToken", $scope.userAccessToken);
+
+    $scope.searchLocations = "";
 
     $ionicModal.fromTemplateUrl('templates/bar.html', {
         scope: $scope,
@@ -224,53 +279,97 @@ angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB
       console.log(bar);
       $scope.modal.show();
       $scope.barDetail = bar;
-    }
+
+      $scope.share = function (barEvent) {
+        console.log("$scope.barDetail.mic_nights", $scope.barDetail.mic_nights);
+        console.log("share clicked");
+        console.log("$scope.barDetail", $scope.barDetail);
+
+      ngFB.api({
+          method: 'post',
+          path: ' /me/feed',
+          params: {
+              message: "I'll be attending Open Mic Night at " + $scope.barDetail.name + "."
+          }
+      }).then(
+          function () {
+              alert('The session was shared on Facebook');
+          },
+          function () {
+              alert('An error occurred while sharing this session on Facebook');
+          });
+      }
+
+      function initialize() {
+        var mapProp = {
+          center:new google.maps.LatLng(51.508742,-0.120850),
+          zoom:5,
+          mapTypeId:google.maps.MapTypeId.ROADMAP
+        };
+        var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+      }
+      google.maps.event.addDomListener(window, 'load', initialize);
+    };
   })
 })
 
-.controller('SocialCtrl', function($scope, $firebaseArray, $firebaseObject, $ionicModal){
+.controller('SocialCtrl', function($scope, $firebaseArray, $firebaseObject, $ionicModal, allUsers){
 
-  var authRequired = true;
-  $scope.userId = window.localStorage.getItem("userId");
-  $scope.userEdit = window.localStorage.getItem('firebaseId'); 
-  console.log("$scope.userEdit", $scope.userEdit);
+  $scope.$on('$ionicView.enter', function(e) {
 
-        // why am i getting myself as a friend???
-  var userRef = new Firebase('https://openmicnight.firebaseio.com/users/');
-  $scope.users = $firebaseArray(userRef); 
-  console.log ("$scope.users", $scope.users);
+    var authRequired = true;
+    $scope.userId = window.localStorage.getItem("userId");
+    $scope.firebaseId = window.localStorage.getItem('firebaseId');
 
-    $ionicModal.fromTemplateUrl('templates/social_detail.html', {
-    scope: $scope,
-    animation: 'slide-in-up'
-    }).then(function(modal) {
-      $scope.modal = modal;
+    var userRef = new Firebase('https://openmicnight.firebaseio.com/users/');
+    $scope.users = $firebaseArray(userRef); 
+    console.log ("$scope.users", $scope.users);
 
-    });
-    $scope.openModal = function() {
+    $scope.searchUsers = "";
 
+      $ionicModal.fromTemplateUrl('templates/artist_detail.html', {
+      scope: $scope,
+      animation: 'slide-in-up'
+      }).then(function(modal) {
+        $scope.modal = modal;
+
+      });
+      $scope.openModal = function() {
+
+        $scope.modal.show();
+      };
+      $scope.closeModal = function() {
+        $scope.modal.hide();
+      };
+      //Cleanup the modal when we're done with it!
+      $scope.$on('$destroy', function() {
+        $scope.modal.remove();
+      });
+      // Execute action on hide modal
+      $scope.$on('modal.hidden', function() {
+        // Execute action
+      });
+      // Execute action on remove modal
+      $scope.$on('modal.removed', function() {
+        // Execute action
+      });
+
+      $scope.seeUserDetail = function (user) {
+      console.log(user);
       $scope.modal.show();
-    };
-    $scope.closeModal = function() {
-      $scope.modal.hide();
-    };
-    //Cleanup the modal when we're done with it!
-    $scope.$on('$destroy', function() {
-      $scope.modal.remove();
-    });
-    // Execute action on hide modal
-    $scope.$on('modal.hidden', function() {
-      // Execute action
-    });
-    // Execute action on remove modal
-    $scope.$on('modal.removed', function() {
-      // Execute action
-    });
+      $scope.userDetail = user;
 
-    $scope.seeUserDetail = function (user) {
-    console.log(user);
-    $scope.modal.show();
-    $scope.userDetail = user;
-  }
+      console.log("$scope.userDetail.contacts", $scope.userDetail.contacts);
+
+        // Add link for empty profile
+        for (var key in $scope.userDetail) {
+          if ($scope.userDetail[key] === undefined || $scope.userDetail[key] === "") {
+            $scope.userDetail[key] = "No User Information";
+          } 
+        }
+      }
+
+  })
 })
+
 

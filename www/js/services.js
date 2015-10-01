@@ -5,17 +5,7 @@ angular.module('starter.services', [])
   return $firebaseArray(locationsRef);
 })
 
-.factory('storage', function () {
-    var bucket = {};
-
-    return {
-        get: function (junk) {
-            if (bucket.hasOwnProperty(junk)) {
-                return bucket[junk];
-            }
-        },
-        set: function (key, value) {
-            bucket[key] = value;
-        }
-    };
-});
+.factory('allUsers', function ($firebaseArray) {
+  var usersRef = new Firebase('https://openmicnight.firebaseio.com/users/');
+  return $firebaseArray(usersRef);
+})

@@ -1,9 +1,15 @@
-<ion-view view-title="Social">
+<ion-view view-title="Artists on Open Mic Night">
   <ion-content>
+    <div class="list list-inset">
+      <label class="item item-input">
+        <i class="icon ion-search placeholder-icon"></i>
+        <input type="text" placeholder="Search" ng-model='searchUsers'>
+      </label>
+    </div>
     <ion-list>
-      <ion-item ng-repeat="user in users"
+      <ion-item ng-repeat="user in users | filter: searchUsers"
                 ng-click='seeUserDetail(user)' class="item item-avatar item-icon-right" href="#">
-        <img src="https://graph.facebook.com/{{user.uid}}/picture?width=300&height=300">
+        <img ng-src="https://graph.facebook.com/{{user.uid}}/picture?width=300&height=300" alt src="https://image.freepik.com/free-icon/super-simple-avatar_318-1018.jpg">
         {{user.name}}
         <i class="icon ion-chevron-right" style="color:#ccc; font-size:16px;"></i>
       </ion-item>

@@ -1,0 +1,307 @@
+{
+  "locations" : [ {
+    "address" : "217 Arcade Alley, Nashville, TN",
+    "img" : "http://static.wixstatic.com/media/a7c121_7e59bbc8c8fad88a53dd35eea424fe2e.png_srz_240_257_85_22_0.50_1.20_0.00_png_srz",
+    "mic_nights" : [ {
+      "all_ages" : "Yes",
+      "day_of_week" : "Tuesday",
+      "equipment_provided" : "PA System, 2 mic stands, 3 mics, guitar cables",
+      "host" : "Not Available",
+      "length_of_time" : "Not Available",
+      "music_genre" : "All Genres",
+      "notes" : "Open Mic runs EVERY Tuesday night from 7-10. 3 performers will be picked each week to spotlight the first hour every Tuesday. Call for advanced signup.",
+      "time" : "6PM - 9PM"
+    } ],
+    "name" : "Back Alley Diner",
+    "phone" : "(615) 251-3003",
+    "website" : "http://www.backalleydiner.com/"
+  }, {
+    "address" : "4104 Hillsboro Road, Nashville, TN",
+    "img" : "http://s3.amazonaws.com/webassets.ticketmob.com/TS/images/ShowPosters/591D3A04-C2D0-E659-10643DCEE0A6C96F.jpg",
+    "mic_nights" : [ {
+      "all_ages" : "Yes",
+      "day_of_week" : "Monday",
+      "equipment_provided" : "Kawai keyboard, PA, mics and lines",
+      "host" : "Not Available",
+      "length_of_time" : "1-2 original songs",
+      "music_genre" : "All Genres",
+      "notes" : "Sign up is now done by phone and begins at 11 am on the Monday you want to play.  Writers who are on the list must be at the club and have checked in with the host by 5:15pm on that Monday evening in order to perform.  The number is 615-943-8168.",
+      "time" : "6-9PM"
+    }, {
+      "all_ages" : "Yes",
+      "day_of_week" : "Sunday",
+      "equipment_provided" : "Kawai keyboard, PA, mics and lines",
+      "host" : "Rotates",
+      "length_of_time" : "Not Available",
+      "music_genre" : "All Genres",
+      "notes" : "Scheduled by audition only.",
+      "time" : "8PM"
+    } ],
+    "name" : "Bluebird Cafe",
+    "phone" : "(615) 383-1461",
+    "website" : "http://bluebirdcafe.com/"
+  }, {
+    "address" : "1911 Broadway, Nashville, TN",
+    "img" : "http://cdn.localeats.com/media/images/19586-1.jpg",
+    "mic_nights" : [ {
+      "all_ages" : "Yes",
+      "day_of_week" : "Tuesdays",
+      "equipment_provided" : "Not Available",
+      "host" : "Barbara Cloyd",
+      "length_of_time" : "Not Available",
+      "music_genre" : "All Genres",
+      "notes" : "Be there by 9PM to sign up.",
+      "time" : "10PM"
+    }, {
+      "all_ages" : "Yes",
+      "day_of_week" : "Wednesday",
+      "equipment_provided" : "Not Available",
+      "host" : "Terri Jo Box",
+      "length_of_time" : "Not Available",
+      "music_genre" : "All Genres",
+      "notes" : "None Available",
+      "time" : "8PM-12AM"
+    } ],
+    "name" : "Blue Bar",
+    "phone" : "(615) 327-8001",
+    "website" : "http://www.facebook.com/Blue-Bar-Rack-Room-120576161287625/timeline/"
+  }, {
+    "address" : "1028 16th Ave., Nashville, TN",
+    "img" : "http://fbcdn-photos-a-a.akamaihd.net/hphotos-ak-xaf1/v/t1.0-0/p480x480/10988275_714157978682450_4677196809630256942_n.jpg?oh=75526676cb9fdfee3f6e64e3ac1bd49a&oe=569C8E1C&__gda__=1449323515_15136dfddd2f8251df95c238a0423bd6",
+    "mic_nights" : [ {
+      "all_ages" : "No, 21 and Up.",
+      "day_of_week" : "Thursday",
+      "equipment_provided" : "Not Available",
+      "host" : "Not Available",
+      "length_of_time" : "Not Available",
+      "music_genre" : "All Genres",
+      "notes" : "The shows have songwriter rounds and a featured performer each night. The easiest way to book is to drop by on a Thursday and talk to owner/host Lizard Thom Case about a future date. Or you can check the calendar for open slots and email lizardvillemusic@aol.com with the date and time you are interested in.",
+      "time" : "7PM"
+    } ],
+    "name" : "Bobby's Idle Hour",
+    "phone" : "(615) 726-0446",
+    "website" : "http://bobbysidlehour.com/"
+  }, {
+    "address" : "2613 West End Ave, Nashville, TN",
+    "img" : "http://s3.amazonaws.com/gigdog.fm/photos/venue/thumb_Commodore_Grill.png",
+    "mic_nights" : [ {
+      "all_ages" : "Yes",
+      "day_of_week" : "Monday",
+      "equipment_provided" : "Not Available",
+      "host" : "Debi Champion",
+      "length_of_time" : "3 songs",
+      "music_genre" : "All Genres",
+      "notes" : "Be there by 9:00 PM to play at the late-night open mic, which serves as an audition for future bookings.",
+      "time" : "6PM"
+    }, {
+      "all_ages" : "Yes",
+      "day_of_week" : "Tuesday",
+      "equipment_provided" : "Not Available",
+      "host" : "Not Available",
+      "length_of_time" : "Not Available",
+      "music_genre" : "All Genres",
+      "notes" : "None Available",
+      "time" : "7PM-11:30PM"
+    }, {
+      "all_ages" : "Yes",
+      "day_of_week" : "Wednesday",
+      "equipment_provided" : "Not Available",
+      "host" : "Debi Champion",
+      "length_of_time" : "3 songs",
+      "music_genre" : "All Genres",
+      "notes" : "Be there by 9:00 PM to play at the late-night open mic, which serves as an audition for future bookings.",
+      "time" : "6PM"
+    }, {
+      "all_ages" : "Yes",
+      "day_of_week" : "Thursday",
+      "equipment_provided" : "Not Available",
+      "host" : "Debi Champion",
+      "length_of_time" : "3 songs",
+      "music_genre" : "All Genres",
+      "notes" : "Be there by 9:00 PM to play at the late-night open mic, which serves as an audition for future bookings.",
+      "time" : "6PM"
+    }, {
+      "all_ages" : "Yes",
+      "day_of_week" : "Friday",
+      "equipment_provided" : "4 mics, 4 Di's",
+      "host" : "Not Available",
+      "length_of_time" : "1 hour",
+      "music_genre" : "All Genres",
+      "notes" : "The weekend shows are one hour sets with the last hours of the night for anyone that wants to play their original music only.",
+      "time" : "7PM-11:00PM"
+    }, {
+      "all_ages" : "Yes",
+      "day_of_week" : "Saturday",
+      "equipment_provided" : "Not Available",
+      "host" : "Not Available",
+      "length_of_time" : "Not Available",
+      "music_genre" : "All Genres",
+      "notes" : "None Available",
+      "time" : "7PM-12AM"
+    }, {
+      "all_ages" : "Yes",
+      "day_of_week" : "Sunday",
+      "equipment_provided" : "Not Available",
+      "host" : "Debi Champion",
+      "length_of_time" : "3 songs",
+      "music_genre" : "All Genres",
+      "notes" : "Be there by 9:00 PM to play at the late-night open mic, which serves as an audition for future bookings.",
+      "time" : "6PM"
+    } ],
+    "name" : "The Commodore Grille at the Holiday Inn Select, Vanderbilt",
+    "phone" : "(615) 327-4707",
+    "website" : "http://debichampion.com/"
+  }, {
+    "address" : "2309 B Franklin Pike, Nashville, TN",
+    "img" : "http://www.openmicnashville.com/attachments/photos/big/544eb20f-c858-4cd1-a3fe-45a543145cc7.jpg",
+    "mic_nights" : [ {
+      "all_ages" : "Yes",
+      "day_of_week" : "Monday",
+      "equipment_provided" : "Cables, DIs, Microphones",
+      "host" : "Not Available",
+      "length_of_time" : "Not Available",
+      "music_genre" : "All Genres",
+      "notes" : "The sign up sheet goes out at 8pm - Show up to sign up. Featured artists start at 8, then open mic begins at 9. We go until everyone who wants to play has played.",
+      "time" : "9PM - 12AM"
+    } ],
+    "name" : "Daisy Duke's",
+    "phone" : "(619) 813-0510",
+    "website" : "http://www.facebook.com/groups/nuwritersnight"
+  }, {
+    "address" : "2106-A 8th Ave. S., Nashville, TN",
+    "img" : "http://www.nowplayingnashville.com/sites/nowplayingnashville.com/images/org/30524/douglas_corner.jpg",
+    "mic_nights" : [ {
+      "all_ages" : "Yes",
+      "day_of_week" : "Tuesday",
+      "equipment_provided" : "Not Available",
+      "host" : "Donnie Winters",
+      "length_of_time" : "2 songs in rounds of 4",
+      "music_genre" : "All Genres",
+      "notes" : "Must call (615) 292-2530 on Tuesdays between 1-6pm. You must be here at 8pm.",
+      "time" : "8PM-Close"
+    } ],
+    "name" : "Douglas Corner Cafe",
+    "phone" : "(615) 298-1688",
+    "website" : "http://douglascorner.com/"
+  }, {
+    "address" : "114 28th Avenue North, Nashville, TN",
+    "img" : "http://www.jedsnashville.com/Jeds_Nashville/Home_files/JedsRedLogo.png",
+    "mic_nights" : [ {
+      "all_ages" : "No, 21 and Up.",
+      "day_of_week" : "Tuesday",
+      "equipment_provided" : "Not Available",
+      "host" : "Justin Hammel",
+      "length_of_time" : "Not Available",
+      "music_genre" : "All Genres",
+      "notes" : "Sign-up at 7:30pm.",
+      "time" : "8PM"
+    } ],
+    "name" : "Jed's",
+    "phone" : "(615) 320-4399",
+    "website" : "http://www.jedsnashville.com/Jeds_Nashville/Home.html"
+  }, {
+    "address" : "4420 Whites Creek Pike, Nashville, TN",
+    "img" : "http://www.nowplayingnashville.com/sites/nowplayingnashville.com/images/event/441918167/richards.jpg",
+    "mic_nights" : [ {
+      "all_ages" : "Yes",
+      "day_of_week" : "Thursday",
+      "equipment_provided" : "Not Available",
+      "host" : "Barbara Cloyd",
+      "length_of_time" : "Not Available",
+      "music_genre" : "All Genres",
+      "notes" : "Writers workshop with Barbara Cloyd.",
+      "time" : "5:30PM-6:15PM"
+    } ],
+    "name" : "Ri'chard's Cafe",
+    "phone" : "(615) 298-1688",
+    "website" : "http://www.richardscafe.com/"
+  } ],
+  "users" : {
+    "0" : {
+      "id" : 101257083563398,
+      "name" : "Margaret Alajcgcaiabff Lauescu"
+    },
+    "1" : {
+      "id" : 138249209859239,
+      "name" : "Mark Alajbbdhbehhc Chaistein"
+    },
+    "2" : {
+      "id" : 140939726255766,
+      "name" : "Joe Alajaibahffjc Alisonwitz"
+    },
+    "3" : {
+      "id" : 153627991650423,
+      "name" : "John Alakiffiijfe Zamoresen"
+    },
+    "-K-0Pd7KqX-3bMW3SdvH" : {
+      "email" : "kgreer4414@gmail.com",
+      "facebook" : "https://www.facebook.com/app_scoped_user_id/10206398365232116/",
+      "contacts" : [ {
+        "id" : "10153444268709713",
+        "name" : "Chloe Anderson"
+      }, {
+        "id" : "10153050022226759",
+        "name" : "Rachel Morgan"
+      } ],
+      "instagram" : "Kevinkrossmusic",
+      "linkedin" : "",
+      "name" : "Kevin Kross",
+      "phone" : "",
+      "reverbnation" : "",
+      "soundcloud" : "",
+      "twitter" : "Kevinkross22",
+      "uid" : "10206398365232116",
+      "youtube" : ""
+    },
+    "-K-1H8BigMOT7SE7VjDt" : {
+      "bio" : "Here is my bio!",
+      "contacts" : [ {
+        "id" : "10153444268709713",
+        "name" : "Chloe Anderson"
+      }, {
+        "id" : "10208297692105835",
+        "name" : "Kayla O'Heran"
+      }, {
+        "id" : "10206398365232116",
+        "name" : "Kevin Kross"
+      } ],
+      "email" : "rachyllmorgan@gmail.com",
+      "facebook" : "https://www.facebook.com/app_scoped_user_id/10153050022226759/",
+      "instagram" : "rachleemorgan",
+      "linkedin" : "rachelleemorgan",
+      "name" : "Rachel Morgan",
+      "phone" : "269-317-1804",
+      "reverbnation" : "",
+      "soundcloud" : "",
+      "twitter" : "",
+      "uid" : "10153050022226759",
+      "website" : "www.raquelmorgan.com",
+      "youtube" : ""
+    },
+    "-K-1Md6p2o07of-VSyWj" : {
+      "bio" : "Chloe's bio.",
+      "contacts" : [ {
+        "id" : "10153050022226759",
+        "name" : "Rachel Morgan"
+      }, {
+        "id" : "10208297692105835",
+        "name" : "Kayla O'Heran"
+      }, {
+        "id" : "10206398365232116",
+        "name" : "Kevin Kross"
+      } ],
+      "email" : "chloejo_3292@hotmail.com",
+      "facebook" : "https://www.facebook.com/app_scoped_user_id/10153444268709713/",
+      "instagram" : "Chloejo3292",
+      "linkedin" : "",
+      "name" : "Chloe Anderson",
+      "phone" : "5555555555",
+      "reverbnation" : "",
+      "soundcloud" : "",
+      "twitter" : "",
+      "uid" : "10153444268709713",
+      "website" : "Www.chlojo.com",
+      "youtube" : ""
+    }
+  }
+}

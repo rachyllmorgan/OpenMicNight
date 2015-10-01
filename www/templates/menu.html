@@ -18,19 +18,16 @@
     </ion-header-bar>
     <ion-content>
       <ion-list>
-        <ion-item menu-close ng-click="login()">
-          Login
-        </ion-item>
-        <ion-item menu-close href="#/app/{{userId}}/profile">
-          Profile
-        </ion-item>
         <ion-item menu-close href="#/app/locations">
           Locations
         </ion-item>
-        <ion-item menu-close href="#/app/search">
-          Search
+        <ion-item menu-close ng-click="login()">
+          Login
         </ion-item>
-        <ion-item menu-close href="#/app/{{userId}}/social">
+        <ion-item menu-close href='#/app/profile/{{userId}}'>
+          Profile
+        </ion-item>
+        <ion-item menu-close href="#/app/social">
           Social
         </ion-item>
       </ion-list>
