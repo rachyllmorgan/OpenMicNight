@@ -3,11 +3,11 @@
     <div class="list list-inset">
       <label class="item item-input">
         <i class="icon ion-search placeholder-icon"></i>
-        <input type="text" placeholder="Search" ng-model='searchUsers'>
+        <input type="text" placeholder="Search" ng-model='searchUsers.name'>
       </label>
     </div>
     <ion-list>
-      <ion-item ng-repeat="user in users | filter: searchUsers"
+      <ion-item ng-repeat="user in users | filter: searchUsers:name"
                 ng-click='seeUserDetail(user)' class="item item-avatar item-icon-right" href="#">
         <img ng-src="https://graph.facebook.com/{{user.uid}}/picture?width=300&height=300" alt src="https://image.freepik.com/free-icon/super-simple-avatar_318-1018.jpg">
         {{user.name}}
