@@ -1,5 +1,49 @@
 /* Empty. Add your own CSS if you like */
 
+/*home*/
+.homeImg {
+  background: url(http://www.hercampus.com/sites/default/files/2015/09/11/microphone_black_background2.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.homeHeader{
+  margin-top: 5%;
+  margin-left: 5%;
+}
+
+.homeHeader > h2{
+  color: white;
+}
+
+.locationRef{
+  padding: 10%;
+  margin-top: 30%;
+  text-decoration: none;
+}
+
+.locationRef > a{
+  text-decoration: none;
+  color: white;
+  font-weight: 500;
+}
+
+.profileRef{
+  padding:10%;
+  margin-top: 30%;
+}
+
+.profileRef > a{
+  text-decoration: none;
+  color: white;
+  font-weight: 500;
+}
+
+.homeCard {
+  padding: 30%;
+}
+
 /* Profile View */
 #profile-bg {
   position: fixed;
@@ -85,12 +129,18 @@
   }
 }
 
-@media screen and (min-width: 640px) {
+@media screen and (min-width: 475px) {
   .large {
     display: inline-block;
     font-size: 40px;
     color: black;
     margin: 3%;
+  }
+  .locationRef{
+    margin-top: 20%;
+  }
+  .profileRef{
+    margin-top: 20%;
   }
 }
 
@@ -100,6 +150,12 @@
     font-size: 50px;
     color: black;
     margin: 3%;
+  }
+  .locationRef{
+    margin-top: 5%;
+  }
+  .profileRef{
+    margin-top: 5%;
   }
 }
 
