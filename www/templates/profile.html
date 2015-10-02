@@ -5,81 +5,88 @@
     <button class="button button-icon"><i class="icon-gear-b"></i></button>
   </div>
   <ion-content has-header="true">
-    <div id="profile-bg"></div>
-    <div id="content">
-      <div id="profile-info">
-        <img id="profile-image" ng-src="https://graph.facebook.com/{{user.uid}}/picture?width=300&height=300" alt src="https://image.freepik.com/free-icon/super-simple-avatar_318-1018.jpg">
-        <h3 id="profile-name">{{user.name}}</h3>
-      </div>
-    </div>
-    <div class="center">
+    <md-tabs md-dynamic-height md-border-bottom centerTabs>
+      <md-tab label="About Me">
+        <md-content>
+          <div id="profile-bg"></div>
+          <div id="content">
+            <div id="profile-info">
+              <img id="profile-image" ng-src="https://graph.facebook.com/{{user.uid}}/picture?width=300&height=300" alt src="https://image.freepik.com/free-icon/super-simple-avatar_318-1018.jpg">
+              <h3 id="profile-name">{{user.name}}</h3>
+            </div>
+          </div>
+          <div class="center">
 
-      <a href="#">
-        <i class="icon ion-email padding large"></i>
-      </a>
+            <a href="#">
+              <i class="icon ion-email padding large"></i>
+            </a>
 
-      <a class="ion-ios7-telephone" ng-href="tel: {{user.phone}}" ng-show="user.phone !== 'No User Information'">
-        <i class="icon ion-ios-telephone padding large"></i>
-      </a>
+            <a class="ion-ios7-telephone" ng-href="tel: {{user.phone}}" ng-show="user.phone !== 'No User Information'">
+              <i class="icon ion-ios-telephone padding large"></i>
+            </a>
 
-      <a href="{{user.facebook}}" target="_blank" ng-show="user.facebook !== 'No User Information'">
-        <i class="icon ion-social-facebook padding large"></i>
-      </a>
+            <a href="{{user.facebook}}" target="_blank" ng-show="user.facebook !== 'No User Information'">
+              <i class="icon ion-social-facebook padding large"></i>
+            </a>
 
-      <a href="https://www.instagram.com/{{user.instagram}}" target="_blank" ng-show="user.instagram !== 'No User Information'">
-        <i class="icon ion-social-instagram padding large" ></i>
-      </a>
+            <a href="https://www.instagram.com/{{user.instagram}}" target="_blank" ng-show="user.instagram !== 'No User Information'">
+              <i class="icon ion-social-instagram padding large" ></i>
+            </a>
 
-      <a href="https://www.reverbnation.com/{{user.reverbnation}}" target="_blank" ng-show="user.reverbnation !== 'No User Information'">
-        <i class="icon ion-ios-mic padding large"></i>
-      </a>
+            <a href="https://www.reverbnation.com/{{user.reverbnation}}" target="_blank" ng-show="user.reverbnation !== 'No User Information'">
+              <i class="icon ion-ios-mic padding large"></i>
+            </a>
 
-      <a href="http://www.twitter.com/{{user.twitter}}" target="_blank" ng-show="user.twitter !== 'No User Information'">
-        <i class="icon ion-social-twitter padding large"></i>
-      </a>
+            <a href="http://www.twitter.com/{{user.twitter}}" target="_blank" ng-show="user.twitter !== 'No User Information'">
+              <i class="icon ion-social-twitter padding large"></i>
+            </a>
 
-      <a href="http://www.linkedin.com/in/{{user.linkedin}}" target="_blank" ng-show="user.linkedin !== 'No User Information'">
-        <i class="icon ion-social-linkedin padding large"></i>
-      </a>
+            <a href="http://www.linkedin.com/in/{{user.linkedin}}" target="_blank" ng-show="user.linkedin !== 'No User Information'">
+              <i class="icon ion-social-linkedin padding large"></i>
+            </a>
 
-      <a href="http://www.soundcloud.com/{{user.soundcloud}}" target="_blank" ng-show="user.soundcloud !== 'No User Information'">
-        <i class="icon ion-ios-cloud padding large"></i>
-      </a>
+            <a href="http://www.soundcloud.com/{{user.soundcloud}}" target="_blank" ng-show="user.soundcloud !== 'No User Information'">
+              <i class="icon ion-ios-cloud padding large"></i>
+            </a>
 
-      <a href="http://www.youtube.com/{{user.youtube}}" target="_blank" ng-show="user.youtube !== 'No User Information'">
-        <i class="icon ion-social-youtube padding large"></i>
-      </a>
+            <a href="http://www.youtube.com/{{user.youtube}}" target="_blank" ng-show="user.youtube !== 'No User Information'">
+              <i class="icon ion-social-youtube padding large"></i>
+            </a>
 
-    </div>
-
-<!--       <a class="item item-icon-left" href="#">
-        <i class="icon ion-person-stalker"></i>
-        Friends
-        <span class="badge badge-assertive">0</span>
-      </a> -->
-    <div class="card center">
-      <!-- <p><strong>Music Genre</strong></p>{{user.genre}} -->
-      <p><strong>{{user.name}}'s Website Link</strong></p>{{user.website}}
-      <p><strong>{{user.name}}'s Bio</strong></p>{{user.bio}}
-    </div>
-    <div class="item center">
-      <h3 class="center">Friends</h3>
-      <ion-item ng-repeat="friend in friends"
-                ng-click='seeUserDetail(friend)' class="item item-avatar item-icon-right" href="#">
-        <img ng-src="https://graph.facebook.com/{{friend.id}}/picture?width=300&height=300" alt src="https://image.freepik.com/free-icon/super-simple-avatar_318-1018.jpg">
-        {{friend.name}}
-        <i class="icon ion-chevron-right" style="color:#ccc; font-size:16px;"></i>
-      </ion-item>
-    </div>
-    <div class="item center">
-      <button class="button button-small button-dark" ng-click='editProfile(user)'>
-        Update Profile
-      </button>
-    </div>
-    <div class="item center">
-      <button class="button button-small button-assertive" ng-click="fbLogout(user)">
-      Logout
-      </button>
+          </div>
+          <div class="card center">
+            <!-- <p><strong>Music Genre</strong></p>{{user.genre}} -->
+            <p><strong>{{user.name}}'s Website Link</strong></p>{{user.website}}
+            <p><strong>{{user.name}}'s Bio</strong></p>{{user.bio}}
+          </div>
+          <div class="item center">
+            <button class="button button-small button-dark" ng-click='editProfile(user)'>
+              Update Profile
+            </button>
+          </div>
+          <div class="item center">
+            <button class="button button-small button-assertive" ng-click="fbLogout(user)">
+            Logout
+            </button>
+          </div>
+        </md-content>
+      </md-tab>
+      <md-tab label="Friends">
+        <md-content>
+          <div class="item center">
+            <ion-item ng-repeat="friend in friends"
+                      ng-click='seeUserDetail(friend)' class="item item-avatar item-icon-right" href="#">
+              <img ng-src="https://graph.facebook.com/{{friend.id}}/picture?width=300&height=300" alt src="https://image.freepik.com/free-icon/super-simple-avatar_318-1018.jpg">
+              {{friend.name}}
+              <i class="icon ion-chevron-right" style="color:#ccc; font-size:16px;"></i>
+            </ion-item>
+          </div>
+        </md-content>
+      </md-tab>
+      <md-tab label="Favorite Mics">
+        <md-content>Favorites</md-content>
+      </md-tab>
+    </md-tabs>
     </div>
   </ion-content>
 </ion-view>
