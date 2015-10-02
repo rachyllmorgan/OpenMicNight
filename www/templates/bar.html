@@ -18,6 +18,12 @@
           {{barDetail.website}}
         </a>
       </div>
+      <div class="item tabs tabs-secondary tabs-icon-left" ng-click="addToFavorites(barDetail)">
+        <a class="tab-item">
+          <i class="icon ion-plus-round"></i>
+          Add to Favorites
+        </a>
+      </div>
       <div class="item item-body" ng-repeat='mic_night in barDetail.mic_nights'>
         <h2><strong>{{mic_night.day_of_week}}'s</strong></h2>
           <i class="icon ion-clock"></i>
@@ -27,20 +33,6 @@
         <p><strong>All Age Venue: </strong>{{mic_night.all_ages}}</p>
         <p><strong>Equipment Provided: </strong>{{mic_night.equipment_provided}}</p>
         <p><strong>Notes: </strong>{{mic_night.notes}}</p>
-        <div class="item tabs tabs-secondary tabs-icon-left">
-          <a class="tab-item">
-            <i class="icon ion-thumbsup"></i>
-            Like
-          </a>
-          <a class="tab-item">
-            <i class="icon ion-chatbox"></i>
-            Comment
-          </a>
-          <a class="tab-item" ng-click='share()'>
-            <i class="icon ion-share"></i>
-            Share
-          </a>
-        </div>
       </div>
     </div>
   </ion-content>

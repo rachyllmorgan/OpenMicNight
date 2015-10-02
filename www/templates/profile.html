@@ -71,20 +71,40 @@
           </div>
         </md-content>
       </md-tab>
-      <md-tab label="Friends">
+      <!-- Artists Tab -->
+      <md-tab label="Artists">
         <md-content>
           <div class="item center">
-            <ion-item ng-repeat="friend in friends"
-                      ng-click='seeUserDetail(friend)' class="item item-avatar item-icon-right" href="#">
-              <img ng-src="https://graph.facebook.com/{{friend.id}}/picture?width=300&height=300" alt src="https://image.freepik.com/free-icon/super-simple-avatar_318-1018.jpg">
-              {{friend.name}}
-              <i class="icon ion-chevron-right" style="color:#ccc; font-size:16px;"></i>
-            </ion-item>
+            <div class="list list-inset">
+              <label class="item item-input">
+                <i class="icon ion-search placeholder-icon"></i>
+                <input type="text" placeholder="Search" ng-model='searchUsers.name'>
+              </label>
+            </div>
+            <a href="#/app/social">Find Other Artists</a>
+            <div class="card">
+              <ion-item ng-repeat="friend in friends | filter: searchUsers:name"
+                  ng-click='seeUserDetail(friend)' class="item item-avatar item-icon-right" href="#">
+                <img ng-src="https://graph.facebook.com/{{friend.uid}}/picture?width=300&height=300" alt src="https://image.freepik.com/free-icon/super-simple-avatar_318-1018.jpg">
+                {{friend.name}}
+                <i class="icon ion-chevron-right" style="color:#ccc; font-size:16px;"></i>
+              </ion-item>
+            </div>
           </div>
         </md-content>
       </md-tab>
+      <!-- Favorite Bar Tab -->
       <md-tab label="Favorite Mics">
-        <md-content>Favorites</md-content>
+        <md-content>
+          <ion-list>
+            <ion-item ng-repeat="bar in favorites | filter: searchLocations"
+                      ng-click='seeBarDetail(bar)' class="item item-avatar item-icon-right" href="#">
+              <img src="{{bar.img}}">
+              {{bar.name}}
+              <i class="icon ion-chevron-right" style="color:#ccc; font-size:16px;"></i>
+            </ion-item>
+          </ion-list>
+        </md-content>
       </md-tab>
     </md-tabs>
     </div>

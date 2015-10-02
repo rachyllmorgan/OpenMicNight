@@ -33,7 +33,7 @@ angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB
 
           ngFB.api({
             path: '/me',
-            params: {fields: 'id,name,email,link,friends'}
+            params: {fields: 'id,name,email,link'}
           }).then(
             function (user) {
               if (user !== null){
@@ -76,7 +76,7 @@ angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB
                         "youtube": "",
                         "favorites": [],
                         "genres": [],
-                        "contacts": user.friends.data
+                        "contacts": [],
 
                       })
                     $location.path('app/profile/:userId');
@@ -158,10 +158,63 @@ angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB
         }
       })
 
-
+      // Friends Tab
     var friendref = new Firebase('https://openmicnight.firebaseio.com/users/' + $scope.userFireId + '/contacts');
     $scope.friends = $firebaseArray(friendref); 
-    console.log ("$scope.friends", $scope.friends, $scope.userFireId);
+    console.log ("$scope.friends", $scope.friends);
+
+    var userRef = new Firebase('https://openmicnight.firebaseio.com/users/');
+    $scope.users = $firebaseArray(userRef); 
+    console.log ("$scope.users", $scope.users);
+
+    $scope.searchUsers = "";
+
+    $ionicModal.fromTemplateUrl('templates/artist_detail.html', {
+      scope: $scope,
+      animation: 'slide-in-up'
+      }).then(function(Artistmodal) {
+        $scope.Artistmodal = Artistmodal;
+
+      });
+      $scope.openArtistModal = function() {
+
+        $scope.Artistmodal.show();
+      };
+      $scope.closeArtistModal = function() {
+        $scope.Artistmodal.hide();
+      };
+      //Cleanup the modal when we're done with it!
+      $scope.$on('$destroy', function() {
+        $scope.Artistmodal.remove();
+      });
+      // Execute action on hide modal
+      $scope.$on('Artistmodal.hidden', function() {
+        // Execute action
+      });
+      // Execute action on remove modal
+      $scope.$on('Artistmodal.removed', function() {
+        // Execute action
+      });
+
+      $scope.seeUserDetail = function (user) {
+      console.log(user);
+      $scope.Artistmodal.show();
+      $scope.userDetail = user;
+
+      console.log("$scope.userDetail.contacts", $scope.userDetail.contacts);
+
+        // Add link for empty profile
+        for (var key in $scope.userDetail) {
+          if ($scope.userDetail[key] === undefined || $scope.userDetail[key] === "") {
+            $scope.userDetail[key] = "No User Information";
+          } 
+        }
+      }
+
+      // Favorites Tab
+    var favoritesref = new Firebase('https://openmicnight.firebaseio.com/users/' + $scope.userFireId + '/favorites');
+    $scope.favorites = $firebaseArray(favoritesref); 
+    console.log ("$scope.favorites", $scope.favorites);    
 
 // ***************** reseting localStorage but not removing prof photo or bio info ********** //
     $scope.fbLogout = function(){
@@ -238,7 +291,7 @@ angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB
   }
 })
 
-.controller('LocationsCtrl', function($scope, $ionicModal, allLocations, ngFB) {
+.controller('LocationsCtrl', function($scope, $ionicModal, $firebaseArray, allLocations, ngFB) {
   
   $scope.$on('$ionicView.enter', function(e) {
 
@@ -280,40 +333,35 @@ angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB
       $scope.modal.show();
       $scope.barDetail = bar;
 
-      $scope.share = function (barEvent) {
-        console.log("$scope.barDetail.mic_nights", $scope.barDetail.mic_nights);
-        console.log("share clicked");
-        console.log("$scope.barDetail", $scope.barDetail);
+      $scope.addToFavorites = function(bar){
+        console.log("bar", bar);
+        $scope.bar = bar;
 
-      ngFB.api({
-          method: 'post',
-          path: ' /me/feed',
-          params: {
-              message: "I'll be attending Open Mic Night at " + $scope.barDetail.name + "."
-          }
-      }).then(
-          function () {
-              alert('The session was shared on Facebook');
-          },
-          function () {
-              alert('An error occurred while sharing this session on Facebook');
-          });
+        $scope.firebaseId = window.localStorage.getItem('firebaseId'); 
+        console.log("$scope.userId", $scope.userId);
+
+        var ref = new Firebase('https://openmicnight.firebaseio.com/users/' + $scope.firebaseId + '/favorites');
+        $scope.userFavorites = $firebaseArray(ref);
+        $scope.userFavorites.$add($scope.bar)
+          .then(function(data){
+            console.log("Bar added")
+          })
       }
 
-      function initialize() {
-        var mapProp = {
-          center:new google.maps.LatLng(51.508742,-0.120850),
-          zoom:5,
-          mapTypeId:google.maps.MapTypeId.ROADMAP
-        };
-        var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
-      }
-      google.maps.event.addDomListener(window, 'load', initialize);
+      // function initialize() {
+      //   var mapProp = {
+      //     center:new google.maps.LatLng(51.508742,-0.120850),
+      //     zoom:5,
+      //     mapTypeId:google.maps.MapTypeId.ROADMAP
+      //   };
+      //   var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+      // }
+      // google.maps.event.addDomListener(window, 'load', initialize);
     };
   })
 })
 
-.controller('SocialCtrl', function($scope, $firebaseArray, $firebaseObject, $ionicModal, allUsers){
+.controller('SocialCtrl', function($scope, $firebaseArray, $firebaseObject, $ionicModal, allUsers, $location){
 
   $scope.$on('$ionicView.enter', function(e) {
 
@@ -367,6 +415,48 @@ angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB
             $scope.userDetail[key] = "No User Information";
           } 
         }
+          $scope.addToContacts = function(friend){
+            console.log("friend", friend);
+            $scope.friend = friend;
+
+            $scope.firebaseId = window.localStorage.getItem('firebaseId'); 
+
+            var ref = new Firebase('https://openmicnight.firebaseio.com/users/' + $scope.firebaseId + '/contacts');
+            $scope.userContacts = $firebaseArray(ref);
+
+                        // prevent duplicate users
+                  $scope.userContacts.$loaded()
+                    .then(function (userContacts) {
+                      var friendExists = 0;
+                      for (var i = 0; i < userContacts.length; i++) {
+                        if(userContacts[i].uid === friend.uid) {
+                          friendExists = 1;
+                          
+
+                        // store firebase ID
+                          window.localStorage.setItem('userFirebaseId', userContacts[i].uid);
+                          console.log("userFirebaseId", userContacts[i].uid);
+
+                          $location.path('app/profile/:userId');
+
+                        } else {
+                          console.log("New Contact:", userContacts[i].uid);
+                        }
+                      }
+                      // create new user
+                      console.log(friendExists);
+                      if (friendExists === 0) {
+                        $scope.userContacts.$add($scope.friend)
+                        $location.path('app/profile/:userId');
+                      }
+                    })
+
+                    .then(function(data){
+                    console.log("Contact added")
+                    })
+
+            $scope.closeModal();
+          }
       }
 
   })
