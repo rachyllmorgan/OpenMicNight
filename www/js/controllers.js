@@ -128,6 +128,7 @@ angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB
       console.log("no");
     }
 
+    // About me Tab
     var ref = new Firebase('https://openmicnight.firebaseio.com/users');
     $scope.users = $firebaseArray(ref);
 
@@ -150,7 +151,7 @@ angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB
       })
       .then(function(){
 
-      // Add link for empty profile
+      // Add string for empty profile
         for (var key in $scope.user) {
           if ($scope.user[key] === undefined || $scope.user[key] === "") {
             $scope.user[key] = "No User Information";
@@ -158,14 +159,10 @@ angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB
         }
       })
 
-      // Friends Tab
+    // Friends Tab
     var friendref = new Firebase('https://openmicnight.firebaseio.com/users/' + $scope.userFireId + '/contacts');
     $scope.friends = $firebaseArray(friendref); 
     console.log ("$scope.friends", $scope.friends);
-
-    var userRef = new Firebase('https://openmicnight.firebaseio.com/users/');
-    $scope.users = $firebaseArray(userRef); 
-    console.log ("$scope.users", $scope.users);
 
     $scope.searchUsers = "";
 
@@ -177,31 +174,16 @@ angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB
 
       });
       $scope.openArtistModal = function() {
-
         $scope.Artistmodal.show();
       };
       $scope.closeArtistModal = function() {
         $scope.Artistmodal.hide();
       };
-      //Cleanup the modal when we're done with it!
-      $scope.$on('$destroy', function() {
-        $scope.Artistmodal.remove();
-      });
-      // Execute action on hide modal
-      $scope.$on('Artistmodal.hidden', function() {
-        // Execute action
-      });
-      // Execute action on remove modal
-      $scope.$on('Artistmodal.removed', function() {
-        // Execute action
-      });
 
       $scope.seeUserDetail = function (user) {
-      console.log(user);
+      console.log("user", user);
       $scope.Artistmodal.show();
       $scope.userDetail = user;
-
-      console.log("$scope.userDetail.contacts", $scope.userDetail.contacts);
 
         // Add link for empty profile
         for (var key in $scope.userDetail) {
@@ -214,7 +196,29 @@ angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB
       // Favorites Tab
     var favoritesref = new Firebase('https://openmicnight.firebaseio.com/users/' + $scope.userFireId + '/favorites');
     $scope.favorites = $firebaseArray(favoritesref); 
-    console.log ("$scope.favorites", $scope.favorites);    
+    console.log ("$scope.favorites", $scope.favorites);
+
+      $ionicModal.fromTemplateUrl('templates/bar.html', {
+        scope: $scope,
+        animation: 'slide-in-up'
+      }).then(function(barmodal) {
+        $scope.barmodal = barmodal;
+
+      });
+      $scope.openBarModal = function() {
+
+        $scope.barmodal.show();
+      };
+      $scope.closeBarModal = function() {
+        $scope.barmodal.hide();
+      };
+
+    $scope.seeBarDetail = function (bar) {
+      console.log(bar);
+      $scope.barmodal.show();
+      $scope.barDetail = bar;
+
+    };    
 
 // ***************** reseting localStorage but not removing prof photo or bio info ********** //
     $scope.fbLogout = function(){
@@ -247,7 +251,7 @@ angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB
   })
 })
 
-.controller('EditProfileCtrl', function($scope, $firebaseObject, $ionicModal){
+.controller('EditProfileCtrl', function($scope, $firebaseObject, $ionicModal, $location){
 
   $scope.userId = window.localStorage.getItem("userId");
   $scope.firebaseId = window.localStorage.getItem('firebaseId'); 
@@ -287,11 +291,13 @@ angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB
       console.log("promise error", error);
     });
 
+    window.localStorage.getItem("userId");
+    $location.path('app/profile/:userId');
     $scope.closeModal();
   }
 })
 
-.controller('LocationsCtrl', function($scope, $ionicModal, $firebaseArray, allLocations, ngFB) {
+.controller('LocationsCtrl', function($scope, $ionicModal, $firebaseArray, allLocations, ngFB, $location) {
   
   $scope.$on('$ionicView.enter', function(e) {
 
@@ -304,33 +310,21 @@ angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB
     $ionicModal.fromTemplateUrl('templates/bar.html', {
         scope: $scope,
         animation: 'slide-in-up'
-      }).then(function(modal) {
-        $scope.modal = modal;
+      }).then(function(barmodal) {
+        $scope.barmodal = barmodal;
 
       });
-      $scope.openModal = function() {
+      $scope.openBarModal = function() {
 
-        $scope.modal.show();
+        $scope.barmodal.show();
       };
-      $scope.closeModal = function() {
-        $scope.modal.hide();
+      $scope.closeBarModal = function() {
+        $scope.barmodal.hide();
       };
-      //Cleanup the modal when we're done with it!
-      $scope.$on('$destroy', function() {
-        $scope.modal.remove();
-      });
-      // Execute action on hide modal
-      $scope.$on('modal.hidden', function() {
-        // Execute action
-      });
-      // Execute action on remove modal
-      $scope.$on('modal.removed', function() {
-        // Execute action
-      });
 
     $scope.seeBarDetail = function (bar) {
       console.log(bar);
-      $scope.modal.show();
+      $scope.barmodal.show();
       $scope.barDetail = bar;
 
       $scope.addToFavorites = function(bar){
@@ -342,21 +336,35 @@ angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB
 
         var ref = new Firebase('https://openmicnight.firebaseio.com/users/' + $scope.firebaseId + '/favorites');
         $scope.userFavorites = $firebaseArray(ref);
-        $scope.userFavorites.$add($scope.bar)
+
+      // prevent duplicate favorites
+        $scope.userFavorites.$loaded()
+          .then(function (userFavorites) {
+            var favoriteExists = 0;
+            for (var i = 0; i < userFavorites.length; i++) {
+              if(userFavorites[i].name === bar.name) {
+                favoriteExists = 1;
+            
+                $location.path('app/profile/:userId');
+
+              } else {
+                console.log("New Favorite:", userFavorites[i].name);
+              }
+            }
+            // create new user
+            console.log(favoriteExists);
+            if (favoriteExists === 0) {
+              $scope.userFavorites.$add($scope.bar)
+              $location.path('app/profile/:userId');
+            }
+          })
+
           .then(function(data){
             console.log("Bar added")
           })
+ 
+        $scope.closeBarModal();
       }
-
-      // function initialize() {
-      //   var mapProp = {
-      //     center:new google.maps.LatLng(51.508742,-0.120850),
-      //     zoom:5,
-      //     mapTypeId:google.maps.MapTypeId.ROADMAP
-      //   };
-      //   var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
-      // }
-      // google.maps.event.addDomListener(window, 'load', initialize);
     };
   })
 })
@@ -375,39 +383,50 @@ angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB
 
     $scope.searchUsers = "";
 
-      $ionicModal.fromTemplateUrl('templates/artist_detail.html', {
+    $ionicModal.fromTemplateUrl('templates/artist_detail.html', {
       scope: $scope,
       animation: 'slide-in-up'
-      }).then(function(modal) {
-        $scope.modal = modal;
+      }).then(function(Artistmodal) {
+        $scope.Artistmodal = Artistmodal;
 
       });
-      $scope.openModal = function() {
+      $scope.openArtistModal = function() {
 
-        $scope.modal.show();
+        $scope.Artistmodal.show();
       };
-      $scope.closeModal = function() {
-        $scope.modal.hide();
+      $scope.closeArtistModal = function() {
+        $scope.Artistmodal.hide();
       };
-      //Cleanup the modal when we're done with it!
-      $scope.$on('$destroy', function() {
-        $scope.modal.remove();
-      });
-      // Execute action on hide modal
-      $scope.$on('modal.hidden', function() {
-        // Execute action
-      });
-      // Execute action on remove modal
-      $scope.$on('modal.removed', function() {
-        // Execute action
-      });
 
       $scope.seeUserDetail = function (user) {
-      console.log(user);
-      $scope.modal.show();
-      $scope.userDetail = user;
+        console.log(user);
+        $scope.Artistmodal.show();
+        $scope.userDetail = user;
 
-      console.log("$scope.userDetail.contacts", $scope.userDetail.contacts);
+        var favoritesref = new Firebase('https://openmicnight.firebaseio.com/users/' + $scope.userFireId + '/favorites');
+        $scope.favorites = $firebaseArray(favoritesref); 
+        console.log ("$scope.favorites", $scope.favorites);
+
+        $ionicModal.fromTemplateUrl('templates/bar.html', {
+          scope: $scope,
+          animation: 'slide-in-up'
+        }).then(function(barmodal) {
+          $scope.barmodal = barmodal;
+
+        });
+        $scope.openBarModal = function() {
+
+          $scope.barmodal.show();
+        };
+        $scope.closeBarModal = function() {
+          $scope.barmodal.hide();
+        };
+
+        $scope.seeBarDetail = function (bar) {
+          console.log(bar);
+          $scope.barmodal.show();
+          $scope.barDetail = bar;
+        }
 
         // Add link for empty profile
         for (var key in $scope.userDetail) {
@@ -418,6 +437,7 @@ angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB
           $scope.addToContacts = function(friend){
             console.log("friend", friend);
             $scope.friend = friend;
+            $scope.friendAdded = {};
 
             $scope.firebaseId = window.localStorage.getItem('firebaseId'); 
 
@@ -455,7 +475,7 @@ angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB
                     console.log("Contact added")
                     })
 
-            $scope.closeModal();
+            $scope.closeArtistModal();
           }
       }
 

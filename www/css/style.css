@@ -14,30 +14,29 @@
 }
 
 .homeHeader > h2{
+  font-family: 'Andale Mono', monospace;
+  font-style: oblique;
   color: white;
+}
+
+.homeBoxes a{
+  text-decoration: none;
+  color: white;
+  font-weight: 500;
+  font-family: 'Andale Mono', monospace;
+  font-style: oblique;
 }
 
 .locationRef{
-  padding: 10%;
-  margin-top: 30%;
+  font-size: 16px;
+  padding: 30% 5% 10% 5%;
   text-decoration: none;
-}
-
-.locationRef a{
-  text-decoration: none;
-  color: white;
-  font-weight: 500;
 }
 
 .profileRef{
-  padding: 10%;
+  font-size: 16px;
+  padding: 20% 5% 10% 5%;
   margin-top: 20%;
-}
-
-.profileRef a{
-  text-decoration: none;
-  color: white;
-  font-weight: 500;
 }
 
 .homeCard {
@@ -153,11 +152,20 @@
     color: black;
     margin: 3%;
   }
+  .homeHeader{
+    margin-left: 5%;
+  }
   .locationRef{
-    margin-top: 20%;
+    font-size: 18px;
+    margin-top: 0;
+    margin-left: 5%;
+    padding: 10%;
   }
   .profileRef{
-    margin-top: 20%;
+    font-size: 18px;
+    margin-top: 0;
+    margin-left: 5%;
+    padding: 10%;
   }
 }
 
@@ -168,11 +176,21 @@
     color: black;
     margin: 3%;
   }
+  .homeHeader{
+    margin-top: 10%;
+    margin-left: 5%;
+  }
   .locationRef{
-    margin-top: 5%;
+    font-size: 22px;
+    margin-top: 0;
+    margin-left: 5%;
+    padding: 10%;
   }
   .profileRef{
-    margin-top: 5%;
+    font-size: 22px;
+    margin-top: 0;
+    margin-left: 5%;
+    padding: 10%;
   }
 }
 

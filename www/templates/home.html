@@ -3,16 +3,18 @@
 		<div class="homeHeader">
 			<h2>Open Mic Night</h2>
 		</div>
-		<div>
-			<div class="locationRef">
-			  <a href="#/app/locations">Find An Open Mic Night
-			  </a>
-			</div>
-			<div class="profileRef">
-			  <a href="#/app/profile/{{userId}}">
-			    My Open Mic Nights
-			  </a>
-			 </div>
+		<div class="homeBoxes">
+		  <a href="#/app/locations">
+				<div class="locationRef">
+				Find An Open Mic Night
+				</div>
+		  </a>
+		  <a ng-if="!userId" ng-click='fbLogin()'>
+			<a ng-if="userId" href="#/app/profile/{{userId}}">
+			  <div class="profileRef">
+			  	My Open Mic Nights
+			  </div>
+			</a>
 		</div>
 	</ion-content>
 </ion-view>

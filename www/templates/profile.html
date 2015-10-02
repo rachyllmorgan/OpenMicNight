@@ -64,11 +64,12 @@
               Update Profile
             </button>
           </div>
+<!--         Log out button for the future  
           <div class="item center">
             <button class="button button-small button-assertive" ng-click="fbLogout(user)">
             Logout
             </button>
-          </div>
+          </div> -->
         </md-content>
       </md-tab>
       <!-- Artists Tab -->
@@ -83,10 +84,10 @@
             </div>
             <a href="#/app/social">Find Other Artists</a>
             <div class="card">
-              <ion-item ng-repeat="friend in friends | filter: searchUsers:name"
-                  ng-click='seeUserDetail(friend)' class="item item-avatar item-icon-right" href="#">
-                <img ng-src="https://graph.facebook.com/{{friend.uid}}/picture?width=300&height=300" alt src="https://image.freepik.com/free-icon/super-simple-avatar_318-1018.jpg">
-                {{friend.name}}
+              <ion-item ng-repeat="user in friends | filter: searchUsers:name"
+                  ng-click='seeUserDetail(user)' class="item item-avatar item-icon-right" href="#">
+                <img ng-src="https://graph.facebook.com/{{user.uid}}/picture?width=300&height=300" alt src="https://image.freepik.com/free-icon/super-simple-avatar_318-1018.jpg">
+                {{user.name}}
                 <i class="icon ion-chevron-right" style="color:#ccc; font-size:16px;"></i>
               </ion-item>
             </div>
@@ -96,17 +97,25 @@
       <!-- Favorite Bar Tab -->
       <md-tab label="Favorite Mics">
         <md-content>
-          <ion-list>
-            <ion-item ng-repeat="bar in favorites | filter: searchLocations"
-                      ng-click='seeBarDetail(bar)' class="item item-avatar item-icon-right" href="#">
-              <img src="{{bar.img}}">
-              {{bar.name}}
-              <i class="icon ion-chevron-right" style="color:#ccc; font-size:16px;"></i>
-            </ion-item>
-          </ion-list>
+          <div class="item center">
+            <div class="list list-inset">
+              <label class="item item-input">
+                <i class="icon ion-search placeholder-icon"></i>
+                <input type="text" placeholder="Search" ng-model='searchLocations'>
+              </label>
+            </div>
+            <a href="#/app/locations">Find Other Mic Nights</a>
+            <div class="card">
+              <ion-item ng-repeat="bar in favorites | filter: searchLocations"
+                        ng-click='seeBarDetail(bar)' class="item item-avatar item-icon-right" href="#">
+                <img src="{{bar.img}}">
+                {{bar.name}}
+                <i class="icon ion-chevron-right" style="color:#ccc; font-size:16px;"></i>
+              </ion-item>
+            </div>
+          </div>
         </md-content>
       </md-tab>
     </md-tabs>
-    </div>
   </ion-content>
 </ion-view>

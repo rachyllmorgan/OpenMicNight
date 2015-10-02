@@ -58,19 +58,33 @@
         <p><strong>{{userDetail.name}}'s' Website Link</strong><a href='{{userDetail.website}}' target="_blank"></p>{{userDetail.website}}</a>
         <p><strong>{{userDetail.name}}'s Bio</strong></p>{{userDetail.bio}}
       </div>
-      <div>
+      <div class="card">
         <h4 class="center">Friends on Open Mic Night</h4>
         <ion-item ng-repeat="friend in userDetail.contacts" class="item item-avatar item-icon-right" ng-click='seeUserDetail(friend)'>
-          <img ng-src="https://graph.facebook.com/{{friend.id}}/picture?width=300&height=300" alt src="https://image.freepik.com/free-icon/super-simple-avatar_318-1018.jpg">
+          <img ng-src="https://graph.facebook.com/{{friend.uid || friend.id}}/picture?width=300&height=300" alt src="https://image.freepik.com/free-icon/super-simple-avatar_318-1018.jpg">
           {{friend.name}}
           <i class="icon ion-chevron-right" style="color:#ccc; font-size:16px;"></i>
         </ion-item>
       </div>
-      <div class="item tabs tabs-secondary tabs-icon-left" ng-click="addToContacts(userDetail)">
-        <a class="tab-item">
-          <i class="icon ion-ios-personadd"></i>
-          Add to Contacts
-        </a>
+      <div class="card">
+        <h4 class="center">Favorite Open Mics</h4>
+        <ion-item ng-repeat="bar in userDetail.favorites"
+                  ng-click='seeBarDetail(bar)' class="item item-avatar item-icon-right" href="#">
+          <img src="{{bar.img}}">
+          {{bar.name}}
+          <i class="icon ion-chevron-right" style="color:#ccc; font-size:16px;"></i>
+        </ion-item>
+      </div>
+      <div class="card">
+        <div class="item tabs tabs-secondary tabs-icon-left" ng-click="addToContacts(userDetail)">
+          <a class="tab-item">
+            <i class="icon ion-ios-personadd"></i>
+            Add to Contacts
+          </a>
+  <!--         <md-tooltip md-direction="bottom" ng-model="friendAdded.showTooltip">
+            Already a Contact
+          </md-tooltip> -->
+        </div>
       </div>
     </div>
   </ion-content>
