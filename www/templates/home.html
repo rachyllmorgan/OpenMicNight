@@ -1,18 +1,17 @@
 <ion-view hide-nav-bar="true">
 	<ion-content class="homeImg">	
-		<div class="homeHeader">
-			<h2>Open Mic Night</h2>
-		</div>
+		<ion-header class="homeHeader">
+			<h4>Open Mic Night</h4>
+		</ion-header>
 		<div class="homeBoxes">
 		  <a href="#/app/locations">
 				<div class="locationRef">
-				Find An Open Mic Night
+					<h2>Find An Open Mic Night</h2>
 				</div>
 		  </a>
-		  <a ng-if="!userId" ng-click='fbLogin()'>
-			<a ng-if="userId" href="#/app/profile/{{userId}}">
+			<a ng-click='fbLogin()' href="#/app/profile/{{userId}}">
 			  <div class="profileRef">
-			  	My Open Mic Nights
+			  	<h2>My Open Mic Nights</h2>
 			  </div>
 			</a>
 		</div>

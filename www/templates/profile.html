@@ -1,11 +1,6 @@
-<ion-view view-title="Profile">
-  <div class="bar bar-header bar-danger">
-    <button class="button button-icon"><i class="icon-person-add"></i></button>
-    <h1 class="title">Me</h1>
-    <button class="button button-icon"><i class="icon-gear-b"></i></button>
-  </div>
-  <ion-content has-header="true">
-    <md-tabs md-dynamic-height md-border-bottom centerTabs>
+<ion-view view-title="Profile" hide-nav-bar="true">
+  <ion-content>
+    <md-tabs md-dynamic-height md-border-bottom>
       <md-tab label="About Me">
         <md-content>
           <div id="profile-bg"></div>
@@ -21,42 +16,42 @@
               <i class="icon ion-email padding large"></i>
             </a>
 
-            <a class="ion-ios7-telephone" ng-href="tel: {{user.phone}}" ng-show="user.phone !== 'No User Information'">
+            <a class="ion-ios7-telephone" ng-href="tel: {{user.phone}}" ng-if="user.phone !== 'No User Information'">
               <i class="icon ion-ios-telephone padding large"></i>
             </a>
 
-            <a href="{{user.facebook}}" target="_blank" ng-show="user.facebook !== 'No User Information'">
+            <a href="{{user.facebook}}" target="_blank" ng-if="user.facebook !== 'No User Information'">
               <i class="icon ion-social-facebook padding large"></i>
             </a>
 
-            <a href="https://www.instagram.com/{{user.instagram}}" target="_blank" ng-show="user.instagram !== 'No User Information'">
+            <a href="https://www.instagram.com/{{user.instagram}}" target="_blank" ng-if="user.instagram !== 'No User Information'">
               <i class="icon ion-social-instagram padding large" ></i>
             </a>
 
-            <a href="https://www.reverbnation.com/{{user.reverbnation}}" target="_blank" ng-show="user.reverbnation !== 'No User Information'">
+            <a href="https://www.reverbnation.com/{{user.reverbnation}}" target="_blank" ng-if="user.reverbnation !== 'No User Information'">
               <i class="icon ion-ios-mic padding large"></i>
             </a>
 
-            <a href="http://www.twitter.com/{{user.twitter}}" target="_blank" ng-show="user.twitter !== 'No User Information'">
+            <a href="http://www.twitter.com/{{user.twitter}}" target="_blank" ng-if="user.twitter !== 'No User Information'">
               <i class="icon ion-social-twitter padding large"></i>
             </a>
 
-            <a href="http://www.linkedin.com/in/{{user.linkedin}}" target="_blank" ng-show="user.linkedin !== 'No User Information'">
+            <a href="http://www.linkedin.com/in/{{user.linkedin}}" target="_blank" ng-if="user.linkedin !== 'No User Information'">
               <i class="icon ion-social-linkedin padding large"></i>
             </a>
 
-            <a href="http://www.soundcloud.com/{{user.soundcloud}}" target="_blank" ng-show="user.soundcloud !== 'No User Information'">
+            <a href="http://www.soundcloud.com/{{user.soundcloud}}" target="_blank" ng-if="user.soundcloud !== 'No User Information'">
               <i class="icon ion-ios-cloud padding large"></i>
             </a>
 
-            <a href="http://www.youtube.com/{{user.youtube}}" target="_blank" ng-show="user.youtube !== 'No User Information'">
+            <a href="http://www.youtube.com/{{user.youtube}}" target="_blank" ng-if="user.youtube !== 'No User Information'">
               <i class="icon ion-social-youtube padding large"></i>
             </a>
 
           </div>
           <div class="card center">
             <!-- <p><strong>Music Genre</strong></p>{{user.genre}} -->
-            <p><strong>{{user.name}}'s Website Link</strong></p>{{user.website}}
+            <p><strong>{{user.name}}'s Website Link</strong></p><a href='{{user.website}}' target="_blank">{{user.website}}</a>
             <p><strong>{{user.name}}'s Bio</strong></p>{{user.bio}}
           </div>
           <div class="item center">

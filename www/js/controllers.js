@@ -7,22 +7,6 @@ angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB
 
   $scope.userId = window.localStorage.getItem("userId");
 
-  $ionicModal.fromTemplateUrl('templates/login.html', {
-    scope: $scope
-  }).then(function(modal) {
-    $scope.modal = modal;
-  });
-
-  // Triggered in the login modal to close it
-  $scope.closeLogin = function() {
-    $scope.modal.hide();
-  };
-
-  // Open the login modal
-  $scope.login = function() {
-    $scope.modal.show();
-  };
-
   $scope.fbLogin = function () {
     ngFB.login({scope: 'email,public_profile,user_friends'})
       .then(
@@ -53,11 +37,12 @@ angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB
                         window.localStorage.setItem('firebaseId', users[i].$id);
                         console.log("firebaseId", users[i].$id);
 
+                        $scope.userId = window.localStorage.getItem("userId");
                         $location.path('app/profile/:userId');
-
-                      } else {
-                        console.log("New user ID: ", users[i].uid);
                       }
+                      // } else {
+                      //   console.log("New user ID: ", users[i].uid);
+                      // }
                     }
                     // create new user
                     console.log(userExists);
@@ -79,6 +64,8 @@ angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB
                         "contacts": [],
 
                       })
+                    window.location.reload();
+                    $scope.userId = window.localStorage.getItem("userId");
                     $location.path('app/profile/:userId');
                     }
                   })
@@ -89,7 +76,7 @@ angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB
           console.log('Facebook login failed');
         }
       })
-    $scope.closeLogin();
+    // $scope.closeLogin();
   };
 })
 
@@ -103,31 +90,6 @@ angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB
     console.log("$scope.userId", $scope.userId);
     console.log("$scope.userFireId", $scope.userFireId);
 
-//  ******************** want login to pop up if not logged in ****************************
-    if ($scope.userId === null || $scope.userId === undefined) {
-
-      console.log("yes");
-
-      $ionicModal.fromTemplateUrl('templates/login.html', {
-        scope: $scope
-      }).then(function(modal) {
-        $scope.modal = modal;
-      });
-
-      // Triggered in the login modal to close it
-      $scope.closeLogin = function() {
-        $scope.modal.hide();
-      };
-
-      // Open the login modal
-      $scope.login = function() {
-        $scope.modal.show();
-      };
-
-    } else {
-      console.log("no");
-    }
-
     // About me Tab
     var ref = new Firebase('https://openmicnight.firebaseio.com/users');
     $scope.users = $firebaseArray(ref);
@@ -135,7 +97,6 @@ angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB
     $scope.users.$loaded()
       .then(function (users) {
         $scope.userId = window.localStorage.getItem("userId");
-        console.log("users", users)
         for (var i = 0; i < users.length; i++) {
           if(users[i].uid === $scope.userId) {
             console.log("Found User");
@@ -143,10 +104,10 @@ angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB
             var ref = new Firebase('https://openmicnight.firebaseio.com/users/' + $scope.userFireId);
             $scope.user = $firebaseObject(ref);
             console.log("$scope.user", $scope.user);
-
-          } else {
-            console.log("# of users");
           }
+          // } else {
+          //   console.log("# of users");
+          // }
         }
       })
       .then(function(){
@@ -248,6 +209,7 @@ angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB
       $scope.modal.show();
       $scope.userDetail = user;
     }
+
   })
 })
 
@@ -255,7 +217,6 @@ angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB
 
   $scope.userId = window.localStorage.getItem("userId");
   $scope.firebaseId = window.localStorage.getItem('firebaseId'); 
-  console.log("$scope.userId", $scope.userId);
 
   var ref = new Firebase('https://openmicnight.firebaseio.com/users/' + $scope.firebaseId);
   $scope.user = $firebaseObject(ref);
@@ -286,13 +247,13 @@ angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB
 
     $scope.user.$save().then(function(ref) {
       console.log("$scope.user", $scope.user);
-      console.log("ref", ref);
     }, function(error) {
       console.log("promise error", error);
     });
 
-    window.localStorage.getItem("userId");
+    $scope.userId = window.localStorage.getItem("userId");
     $location.path('app/profile/:userId');
+    window.location.reload();
     $scope.closeModal();
   }
 })
