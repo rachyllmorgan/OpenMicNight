@@ -14,7 +14,7 @@
 }
 
 .homeHeader > h4{
-  font-family: Helvetica, sans-serif;
+  font-family: fantasy;, serif;
   font-weight: 600;
   text-align: center;
   color: black;
@@ -203,5 +203,15 @@ a {
     margin-left: 5%;
     padding: 10%;
   }
+}
+
+/*map*/
+
+.scroll {
+    height: 100%;
+}
+ 
+#map {
+    height: 180px;
 }
 

@@ -80,7 +80,7 @@ angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB
   };
 })
 
-.controller('ProfileCtrl', function($scope, ngFB, $firebaseArray, $firebaseObject, $location, $ionicModal) {
+.controller('ProfileCtrl', function($scope, ngFB, $firebaseArray, $firebaseObject, $location, $ionicModal, $ionicLoading, $cordovaEmailComposer, $ionicPlatform, $cordovaGeolocation, $state) {
 
   $scope.$on('$ionicView.enter', function(e) {
 
@@ -142,9 +142,9 @@ angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB
       };
 
       $scope.seeUserDetail = function (user) {
-      console.log("user", user);
-      $scope.Artistmodal.show();
-      $scope.userDetail = user;
+        console.log("user", user);
+        $scope.Artistmodal.show();
+        $scope.userDetail = user;
 
         // Add link for empty profile
         for (var key in $scope.userDetail) {
@@ -258,7 +258,7 @@ angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB
   }
 })
 
-.controller('LocationsCtrl', function($scope, $ionicModal, $firebaseArray, allLocations, ngFB, $location) {
+.controller('LocationsCtrl', function($scope, $ionicModal, $firebaseArray, allLocations, ngFB, $location, $ionicLoading) {
   
   $scope.$on('$ionicView.enter', function(e) {
 
@@ -287,6 +287,32 @@ angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB
       console.log(bar);
       $scope.barmodal.show();
       $scope.barDetail = bar;
+
+
+      google.maps.event.addDomListener(window, 'load', function() {
+        var myLatlng = new google.maps.LatLng(37.3000, -120.4833);
+ 
+        var mapOptions = {
+            center: myLatlng,
+            zoom: 16,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+ 
+        var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+ 
+        navigator.geolocation.getCurrentPosition(function(pos) {
+            map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
+            var myLocation = new google.maps.Marker({
+                position: new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude),
+                map: map,
+                title: "My Location"
+            });
+        });
+ 
+        $scope.map = map;
+      });
+
+    // google.maps.event.addDomListener(window, 'load', initialize);
 
       $scope.addToFavorites = function(bar){
         console.log("bar", bar);
