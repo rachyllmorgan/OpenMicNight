@@ -2,7 +2,7 @@
 
 /*home*/
 .homeImg {
-  background: url('http://images.freeimages.com/images/previews/7b9/one-1517550.jpg');
+  background: url('https://images.unsplash.com/photo-1431069931897-aa1c99a2d2fc?ixlib=rb-0.3.5&q=80&fm=jpg&s=c9bfcd453f0e2274440435b2aa56791d');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -14,18 +14,21 @@
 }
 
 .homeHeader > h4{
-  font-family: fantasy;, serif;
-  font-weight: 600;
+  font-family: Baskerville;
+  font-weight: 800;
+  font-size: 3.5em;
   text-align: center;
-  color: black;
+  color: white;
+  -webkit-text-stroke: 1.3px black;
 }
 
 .homeBoxes h2{
   text-decoration: none;
   font-weight: 600;
-  font-family: Helvetica, sans-serif;
+  font-family: Futura;
   text-align: center;
-  color: black;
+  color: white;
+  -webkit-text-stroke: 1px black;
 }
 
 .homeBoxes{
@@ -34,14 +37,19 @@
 
 .locationRef{
   font-size: 20px;
-  padding: 15% 5% 15% 5%;
+  padding: 25% 5% 10% 5%;
   text-decoration: none;
-  border-bottom: 1px black dashed;
+}
+.home_box {
+  width: 90%;
+}
+.home_border {
+  border-top: 1px solid gray;
 }
 
 .profileRef{
   font-size: 20px;
-  padding: 20% 5% 15% 7%;
+  padding: 15% 5% 20% 7%;
   margin-top: 10%;
 }
 
@@ -164,7 +172,7 @@
   }
   .locationRef{
     font-size: 16px;
-    margin-top: 0;
+    margin-top: 5%;
     margin-left: 3%;
     padding: 10%;
   }
@@ -172,7 +180,7 @@
     font-size: 16px;
     margin-top: 0;
     margin-left: 3%;
-    padding: 10%;
+    padding: 15%;
   }
 }
 a {

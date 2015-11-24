@@ -4,16 +4,20 @@
 			<h4>Open Mic Night</h4>
 		</ion-header>
 		<div class="homeBoxes">
-		  <a href="#/app/locations">
-				<div class="locationRef">
-					<h2>Find An Open Mic Night</h2>
-				</div>
-		  </a>
-			<a ng-click='fbLogin()' href="#/app/profile/{{userId}}">
-			  <div class="profileRef">
-			  	<h2>My Open Mic Nights</h2>
-			  </div>
-			</a>
+			<div class="home_box">
+			  <a href="#/app/locations">
+					<div class="locationRef">
+						<h2>Find An Open Mic Night &#10095</h2>
+					</div>
+			  </a>
+			</div>
+			<div class="home_border home_box">
+				<a ng-click='fbLogin()' href="#/app/profile/{{userId}}">
+				  <div class="profileRef">
+				  	<h2>My Open Mic Nights &#10095</h2>
+				  </div>
+				</a>
+			</div>
 		</div>
 	</ion-content>
 </ion-view>
