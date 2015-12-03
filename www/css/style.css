@@ -1,5 +1,3 @@
-/* Empty. Add your own CSS if you like */
-
 /*home*/
 .homeImg {
   background: url('https://images.unsplash.com/photo-1431069931897-aa1c99a2d2fc?ixlib=rb-0.3.5&q=80&fm=jpg&s=c9bfcd453f0e2274440435b2aa56791d');
@@ -58,6 +56,10 @@
 }
 
 /* Profile View */
+.profile_header {
+  text-align: center;
+}
+
 #profile-bg {
   position: fixed;
   left: 0;
@@ -214,12 +216,11 @@ a {
 }
 
 /*map*/
-
 .scroll {
     height: 100%;
 }
  
 #map {
-    height: 180px;
+    height: 300px;
 }
 

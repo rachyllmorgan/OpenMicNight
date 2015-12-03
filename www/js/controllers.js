@@ -40,9 +40,6 @@ angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB
                         $scope.userId = window.localStorage.getItem("userId");
                         $location.path('app/profile/:userId');
                       }
-                      // } else {
-                      //   console.log("New user ID: ", users[i].uid);
-                      // }
                     }
                     // create new user
                     console.log(userExists);
@@ -76,7 +73,6 @@ angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB
           console.log('Facebook login failed');
         }
       })
-    // $scope.closeLogin();
   };
 })
 
@@ -105,9 +101,6 @@ angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB
             $scope.user = $firebaseObject(ref);
             console.log("$scope.user", $scope.user);
           }
-          // } else {
-          //   console.log("# of users");
-          // }
         }
       })
       .then(function(){
@@ -258,7 +251,7 @@ angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB
   }
 })
 
-.controller('LocationsCtrl', function($scope, $ionicModal, $firebaseArray, allLocations, ngFB, $location, $ionicLoading) {
+.controller('LocationsCtrl', function($scope, $ionicModal, $firebaseArray, allLocations, ngFB, $location, $ionicLoading, GoogleMaps, Markers) {
   
   $scope.$on('$ionicView.enter', function(e) {
 
@@ -284,36 +277,15 @@ angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB
       };
 
     $scope.seeBarDetail = function (bar) {
-      console.log(bar);
+      console.log("bar", bar);
       $scope.barmodal.show();
       $scope.barDetail = bar;
 
+      Markers.setMarkerId("firebaseId", $scope.barDetail.$id);
 
-      google.maps.event.addDomListener(window, 'load', function() {
-        var myLatlng = new google.maps.LatLng(37.3000, -120.4833);
- 
-        var mapOptions = {
-            center: myLatlng,
-            zoom: 16,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-        };
- 
-        var map = new google.maps.Map(document.getElementById("map"), mapOptions);
- 
-        navigator.geolocation.getCurrentPosition(function(pos) {
-            map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
-            var myLocation = new google.maps.Marker({
-                position: new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude),
-                map: map,
-                title: "My Location"
-            });
-        });
- 
-        $scope.map = map;
-      });
+      GoogleMaps.init();
 
-    // google.maps.event.addDomListener(window, 'load', initialize);
-
+      // Add bar to users favorites list
       $scope.addToFavorites = function(bar){
         console.log("bar", bar);
         $scope.bar = bar;
@@ -349,7 +321,6 @@ angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB
           .then(function(data){
             console.log("Bar added")
           })
- 
         $scope.closeBarModal();
       }
     };
@@ -421,49 +392,50 @@ angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB
             $scope.userDetail[key] = "No User Information";
           } 
         }
-          $scope.addToContacts = function(friend){
-            console.log("friend", friend);
-            $scope.friend = friend;
-            $scope.friendAdded = {};
+        
+        $scope.addToContacts = function(friend){
+          console.log("friend", friend);
+          $scope.friend = friend;
+          $scope.friendAdded = {};
 
-            $scope.firebaseId = window.localStorage.getItem('firebaseId'); 
+          $scope.firebaseId = window.localStorage.getItem('firebaseId'); 
 
-            var ref = new Firebase('https://openmicnight.firebaseio.com/users/' + $scope.firebaseId + '/contacts');
-            $scope.userContacts = $firebaseArray(ref);
+          var ref = new Firebase('https://openmicnight.firebaseio.com/users/' + $scope.firebaseId + '/contacts');
+          $scope.userContacts = $firebaseArray(ref);
 
-                        // prevent duplicate users
-                  $scope.userContacts.$loaded()
-                    .then(function (userContacts) {
-                      var friendExists = 0;
-                      for (var i = 0; i < userContacts.length; i++) {
-                        if(userContacts[i].uid === friend.uid) {
-                          friendExists = 1;
-                          
+                  // prevent duplicate users
+            $scope.userContacts.$loaded()
+              .then(function (userContacts) {
+                var friendExists = 0;
+                for (var i = 0; i < userContacts.length; i++) {
+                  if(userContacts[i].uid === friend.uid) {
+                    friendExists = 1;
+                    
 
-                        // store firebase ID
-                          window.localStorage.setItem('userFirebaseId', userContacts[i].uid);
-                          console.log("userFirebaseId", userContacts[i].uid);
+                  // store firebase ID
+                    window.localStorage.setItem('userFirebaseId', userContacts[i].uid);
+                    console.log("userFirebaseId", userContacts[i].uid);
 
-                          $location.path('app/profile/:userId');
+                    $location.path('app/profile/:userId');
 
-                        } else {
-                          console.log("New Contact:", userContacts[i].uid);
-                        }
-                      }
-                      // create new user
-                      console.log(friendExists);
-                      if (friendExists === 0) {
-                        $scope.userContacts.$add($scope.friend)
-                        $location.path('app/profile/:userId');
-                      }
-                    })
+                  } else {
+                    console.log("New Contact:", userContacts[i].uid);
+                  }
+                }
+                // create new user
+                console.log(friendExists);
+                if (friendExists === 0) {
+                  $scope.userContacts.$add($scope.friend)
+                  $location.path('app/profile/:userId');
+                }
+              })
 
-                    .then(function(data){
-                    console.log("Contact added")
-                    })
+              .then(function(data){
+              console.log("Contact added")
+              })
 
-            $scope.closeArtistModal();
-          }
+          $scope.closeArtistModal();
+        }
       }
 
   })

@@ -1,5 +1,5 @@
 <ion-view view-title="Open Mic Night">
-  <ion-content>
+  <ion-content class="background">
     <div class="list list-inset">
       <label class="item item-input">
         <i class="icon ion-search placeholder-icon"></i>
@@ -7,8 +7,8 @@
       </label>
     </div>
     <ion-list>
-      <ion-item ng-repeat="bar in locations | filter: searchLocations"
-                ng-click='seeBarDetail(bar)' class="item item-avatar item-icon-right" href="#">
+      <ion-item card ng-repeat="bar in locations | filter: searchLocations"
+                ng-click='seeBarDetail(bar)' class="item card item-avatar item-icon-right" href="#">
         <img src="{{bar.img}}">
         {{bar.name}}
         <i class="icon ion-chevron-right" style="color:#ccc; font-size:16px;"></i>
