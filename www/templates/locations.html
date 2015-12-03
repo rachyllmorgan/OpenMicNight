@@ -1,14 +1,14 @@
 <ion-view view-title="Open Mic Night">
-  <ion-content class="background">
-    <div class="list list-inset">
+  <ion-content class="location_bkgrnd_img">
+    <div class="list list-inset card_opacity">
       <label class="item item-input">
         <i class="icon ion-search placeholder-icon"></i>
         <input type="text" placeholder="Search" ng-model='searchLocations'>
       </label>
     </div>
     <ion-list>
-      <ion-item card ng-repeat="bar in locations | filter: searchLocations"
-                ng-click='seeBarDetail(bar)' class="item card item-avatar item-icon-right" href="#">
+      <ion-item ng-repeat="bar in locations | filter: searchLocations"
+                ng-click='seeBarDetail(bar)' class="item card item-avatar item-icon-right card_opacity" href="#">
         <img src="{{bar.img}}">
         {{bar.name}}
         <i class="icon ion-chevron-right" style="color:#ccc; font-size:16px;"></i>

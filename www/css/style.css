@@ -56,8 +56,36 @@
 }
 
 /* Profile View */
-.profile_header {
+.tabsdemoDynamicHeight md-content {
+  background-color: transparent !important; 
+}
+
+.tabsdemoDynamicHeight md-content md-tabs {
+  background: #f6f6f6;
+  border: 1px solid #e1e1e1;
+}
+
+.tabsdemoDynamicHeight md-content md-tabs md-tabs-wrapper {
+  background: white; 
+}
+  
+.tabsdemoDynamicHeight md-content h1:first-child {
+  margin-top: 0; 
+}
+
+.profile_header md-pagination-wrapper{
+  position: relative;
+  width: 100%;
+}
+
+.profile_header md-tab-item{
+  color: white;
+  width: 33%;
+}
+
+.profile_header md-tab-item.md-tab.md-active {
   text-align: center;
+  color: red;
 }
 
 #profile-bg {
@@ -65,9 +93,9 @@
   left: 0;
   top: 40px;
   width: 100%;
-  height: 210px;
+  height: 280px;
 
-  background: url('http://images.freeimages.com/images/previews/7b9/one-1517550.jpg') no-repeat transparent;
+  background: url('https://images.unsplash.com/17/unsplash_5252bb51404f8_1.JPG?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&s=f875778fd4151046302dc3695a48b4bd') no-repeat transparent;
   background-size: 100%;
   background-position: 10% 20%;
 
@@ -76,11 +104,11 @@
 
 #content {
   position: relative;
-  margin-top: 250px;
+  margin-top: 320px;
   width: 100%;
   background-color: black;
   box-shadow: 0px -1px 10px rgba(0,0,0,0.4);
-  padding-top: 200px;
+  padding-top: 150px;
 }
 
 #profile-info {
@@ -122,21 +150,22 @@
   font-size: 50px;
 }
 
-.tabsdemoDynamicHeight md-content {
-  background-color: transparent !important; 
+.info_box {
+  background-color: black;
+  color: white;
 }
 
-.tabsdemoDynamicHeight md-content md-tabs {
-  background: #f6f6f6;
-  border: 1px solid #e1e1e1;
+.info_box a {
+  color: white;
+  margin-bottom: 2em;
 }
 
-.tabsdemoDynamicHeight md-content md-tabs md-tabs-wrapper {
-  background: white; 
+.black_background {
+  background-color: black;
 }
-  
-.tabsdemoDynamicHeight md-content h1:first-child {
-  margin-top: 0; 
+
+.black_background a{
+  color: grey;
 }
 
 /*General*/
@@ -213,6 +242,16 @@ a {
     margin-left: 5%;
     padding: 10%;
   }
+}
+
+/*location view*/
+
+.location_bkgrnd_img {
+  background: url('https://images.unsplash.com/13/unsplash_523b1f5aafc42_1.JPG?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&s=f8807d5c9e924748732e5d200793ab5d');
+}
+
+.card_opacity {
+  opacity: 0.8;
 }
 
 /*map*/

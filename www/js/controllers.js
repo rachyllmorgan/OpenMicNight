@@ -76,7 +76,7 @@ angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB
   };
 })
 
-.controller('ProfileCtrl', function($scope, ngFB, $firebaseArray, $firebaseObject, $location, $ionicModal, $ionicLoading, $cordovaEmailComposer, $ionicPlatform, $cordovaGeolocation, $state) {
+.controller('ProfileCtrl', function($scope, ngFB, $firebaseArray, $firebaseObject, $location, $ionicModal, $ionicLoading, $cordovaEmailComposer, $ionicPlatform, $cordovaGeolocation, $state, Markers, GoogleMaps) {
 
   $scope.$on('$ionicView.enter', function(e) {
 
@@ -171,6 +171,10 @@ angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB
       console.log(bar);
       $scope.barmodal.show();
       $scope.barDetail = bar;
+
+      Markers.setMarkerId("firebaseId", $scope.barDetail.$id);
+
+      GoogleMaps.init();
 
     };    
 
@@ -282,6 +286,7 @@ angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB
       $scope.barDetail = bar;
 
       Markers.setMarkerId("firebaseId", $scope.barDetail.$id);
+      console.log("bar", bar);
 
       GoogleMaps.init();
 
@@ -327,7 +332,7 @@ angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB
   })
 })
 
-.controller('SocialCtrl', function($scope, $firebaseArray, $firebaseObject, $ionicModal, allUsers, $location){
+.controller('SocialCtrl', function($scope, $firebaseArray, $firebaseObject, $ionicModal, allUsers, $location, Markers, GoogleMaps){
 
   $scope.$on('$ionicView.enter', function(e) {
 
@@ -384,6 +389,10 @@ angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB
           console.log(bar);
           $scope.barmodal.show();
           $scope.barDetail = bar;
+
+          Markers.setMarkerId("firebaseId", $scope.barDetail.$id);
+
+          GoogleMaps.init();
         }
 
         // Add link for empty profile

@@ -8,7 +8,7 @@
     </div>
     <ion-list>
       <ion-item ng-repeat="user in users | filter: searchUsers:name"
-                ng-click='seeUserDetail(user)' class="item item-avatar item-icon-right" href="#">
+                ng-click='seeUserDetail(user)' class="item card item-avatar item-icon-right" href="#">
         <img ng-src="https://graph.facebook.com/{{user.uid}}/picture?width=300&height=300" alt src="https://image.freepik.com/free-icon/super-simple-avatar_318-1018.jpg">
         {{user.name}}
         <i class="icon ion-chevron-right" style="color:#ccc; font-size:16px;"></i>

@@ -1,7 +1,7 @@
 <ion-view view-title="Profile" hide-nav-bar="true">
-  <ion-content>
+  <ion-content class="location_bkgrnd_img profile_header">
     <md-tabs md-dynamic-height md-border-bottom>
-      <md-tab label="About Me" class="profile_header">
+      <md-tab label="About Me">
         <md-content>
           <div id="profile-bg"></div>
           <div id="content">
@@ -12,12 +12,16 @@
           </div>
           <div class="center">
 
-            <a href="#">
+            <a ng-href="mailto: {{user.email}}">
               <i class="icon ion-email padding large"></i>
             </a>
 
             <a class="ion-ios7-telephone" ng-href="tel: {{user.phone}}" ng-if="user.phone !== 'No User Information'">
               <i class="icon ion-ios-telephone padding large"></i>
+            </a>
+
+            <a href="{{user.website}}" target="_blank" ng-if="user.website !== 'No User Information'">
+              <i class="icon ion-ios-home padding large"></i>
             </a>
 
             <a href="{{user.facebook}}" target="_blank" ng-if="user.facebook !== 'No User Information'">
@@ -49,7 +53,7 @@
             </a>
 
           </div>
-          <div class="card center">
+          <div class="card center info_box">
             <!-- <p><strong>Music Genre</strong></p>{{user.genre}} -->
             <p><strong>{{user.name}}'s Website Link</strong></p><a href='{{user.website}}' target="_blank">{{user.website}}</a>
             <p><strong>{{user.name}}'s Bio</strong></p>{{user.bio}}
@@ -70,7 +74,7 @@
       <!-- Artists Tab -->
       <md-tab label="Artists" class="profile_header">
         <md-content>
-          <div class="item center">
+          <div class="item center black_background">
             <div class="list list-inset">
               <label class="item item-input">
                 <i class="icon ion-search placeholder-icon"></i>
@@ -78,9 +82,9 @@
               </label>
             </div>
             <a href="#/app/social">Find Other Artists</a>
-            <div class="card">
+            <div class="list">
               <ion-item ng-repeat="user in friends | filter: searchUsers:name"
-                  ng-click='seeUserDetail(user)' class="item item-avatar item-icon-right" href="#">
+                  ng-click='seeUserDetail(user)' class="item card item-avatar item-icon-right" href="#">
                 <img ng-src="https://graph.facebook.com/{{user.uid}}/picture?width=300&height=300" alt src="https://image.freepik.com/free-icon/super-simple-avatar_318-1018.jpg">
                 {{user.name}}
                 <i class="icon ion-chevron-right" style="color:#ccc; font-size:16px;"></i>
@@ -92,7 +96,7 @@
       <!-- Favorite Bar Tab -->
       <md-tab label="Favorite Mics" class="profile_header">
         <md-content>
-          <div class="item center">
+          <div class="item center black_background">
             <div class="list list-inset">
               <label class="item item-input">
                 <i class="icon ion-search placeholder-icon"></i>
@@ -100,9 +104,9 @@
               </label>
             </div>
             <a href="#/app/locations">Find Other Mic Nights</a>
-            <div class="card">
+            <div class="list">
               <ion-item ng-repeat="bar in favorites | filter: searchLocations"
-                        ng-click='seeBarDetail(bar)' class="item item-avatar item-icon-right" href="#">
+                        ng-click='seeBarDetail(bar)' class="item card item-avatar item-icon-right" href="#">
                 <img src="{{bar.img}}">
                 {{bar.name}}
                 <i class="icon ion-chevron-right" style="color:#ccc; font-size:16px;"></i>
