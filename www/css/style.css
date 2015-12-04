@@ -182,12 +182,27 @@
   float: right;
 }
 
-@media screen and (min-width: 320px) {
+@media screen and (min-width: 319px) {
   .large {
     display: inline-block;
     font-size: 30px;
     color: black;
     margin: auto;
+  }
+
+  #profile-bg {
+    position: fixed;
+    left: 0;
+    top: 40px;
+    height: 280px;
+    background-position: 10% 20%;
+    margin-top: auto;
+  }
+
+  #content {
+    position: relative;
+    margin-top: 268px;
+    padding-top: 150px;
   }
 }
 
