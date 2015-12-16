@@ -171,6 +171,14 @@ angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB
       console.log(bar);
       $scope.barmodal.show();
       $scope.barDetail = bar;
+      console.log("$scope.barDetail", $scope.barDetail);
+
+              // Add link for empty map
+        // for (var key in $scope.userDetail) {
+        //   if ($scope.barDetail.la === undefined || $scope.userDetail[key] === "") {
+        //     $scope.userDetail[key] = "No User Information";
+        //   } 
+        // }
 
       Markers.setMarkerId("firebaseId", $scope.barDetail.$id);
 
@@ -309,7 +317,7 @@ angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB
               if(userFavorites[i].name === bar.name) {
                 favoriteExists = 1;
             
-                $location.path('app/profile/:userId');
+                $location.path('app/profile');
 
               } else {
                 console.log("New Favorite:", userFavorites[i].name);
@@ -319,7 +327,7 @@ angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB
             console.log(favoriteExists);
             if (favoriteExists === 0) {
               $scope.userFavorites.$add($scope.bar)
-              $location.path('app/profile/:userId');
+              $location.path('app/profile');
             }
           })
 
