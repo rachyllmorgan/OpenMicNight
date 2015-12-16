@@ -65,7 +65,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
   })
 
   .state('app.profile', {
-    url: "/profile/:userId",
+    url: "/profile",
     views: {
       'menuContent': {
         templateUrl: "templates/profile.html",

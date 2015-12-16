@@ -38,7 +38,7 @@ angular.module('starter.controllers', ['starter.services', 'firebase', 'ngOpenFB
                         console.log("firebaseId", users[i].$id);
 
                         $scope.userId = window.localStorage.getItem("userId");
-                        $location.path('app/profile/:userId');
+                        $location.path('app/profile');
                       }
                     }
                     // create new user

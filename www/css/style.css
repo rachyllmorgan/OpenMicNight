@@ -41,6 +41,9 @@
 .home_box {
   width: 90%;
 }
+.home_box a {
+  text-decoration: none;
+}
 .home_border {
   border-top: 1px solid gray;
 }
@@ -104,7 +107,7 @@
 
 #content {
   position: relative;
-  margin-top: 320px;
+  margin-top: 290px;
   width: 100%;
   background-color: black;
   box-shadow: 0px -1px 10px rgba(0,0,0,0.4);
@@ -140,7 +143,13 @@
   box-shadow: 0px 0px 4px rgba(0,0,0,0.7);
 }
 
-#friendShelf {
+.icon_shelf a {
+  display: inline;
+  color: black;
+  font-size: 1.7em;
+}
+
+/*#friendShelf {
   padding: auto;
 }
 
@@ -148,7 +157,7 @@
   display: inline;
   margin: auto;
   font-size: 50px;
-}
+}*/
 
 .info_box {
   background-color: black;
@@ -182,84 +191,17 @@
   float: right;
 }
 
-@media screen and (min-width: 319px) {
-  .large {
-    display: inline-block;
-    font-size: 30px;
-    color: black;
+ /****** Keeping the iphone appearance ****/
+@media only screen and (min-width: 376px) {
+  .browser_border {
+    width: 375px;
     margin: auto;
-  }
-
-  #profile-bg {
-    position: fixed;
-    left: 0;
-    top: 40px;
-    height: 280px;
-    background-position: 10% 20%;
-    margin-top: auto;
-  }
-
-  #content {
-    position: relative;
-    margin-top: 268px;
-    padding-top: 150px;
+    border: 5px inset black;
+    border-radius: 1em;
   }
 }
 
-@media screen and (min-width: 475px) {
-  .large {
-    display: inline-block;
-    font-size: 40px;
-    color: black;
-    margin: 3%;
-  }
-  .homeHeader{
-    margin-left: 5%;
-  }
-  .locationRef{
-    font-size: 16px;
-    margin-top: 5%;
-    margin-left: 3%;
-    padding: 10%;
-  }
-  .profileRef{
-    font-size: 16px;
-    margin-top: 0;
-    margin-left: 3%;
-    padding: 15%;
-  }
-}
-a {
-  text-decoration: none;
-  color: black;
-}
-
-@media screen and (min-width: 900px) {
-  .large {
-    display: inline-block;
-    font-size: 50px;
-    color: black;
-    margin: 3%;
-  }
-  .homeHeader{
-    margin-top: 10%;
-    margin-left: 5%;
-  }
-  .locationRef{
-    font-size: 22px;
-    margin-top: 0;
-    margin-left: 5%;
-    padding: 10%;
-  }
-  .profileRef{
-    font-size: 22px;
-    margin-top: 0;
-    margin-left: 5%;
-    padding: 10%;
-  }
-}
-
-/*location view*/
+/******** location view **************/
 
 .location_bkgrnd_img {
   background: url('https://images.unsplash.com/13/unsplash_523b1f5aafc42_1.JPG?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&s=f8807d5c9e924748732e5d200793ab5d');
